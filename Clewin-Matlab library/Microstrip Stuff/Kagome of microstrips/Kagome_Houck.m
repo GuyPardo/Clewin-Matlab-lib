@@ -14,7 +14,6 @@ classdef Kagome_Houck  < compound_element
            
            obj.sub_elements.buildingBlocks1  = duplicate(KC,Lattice_Size,[y_space,2*x_space]);
            obj.sub_elements.buildingBlocks2  = duplicate(KC.copy().place("right",KC.ports.top),Lattice_Size,[y_space,2*x_space]);
-            
         end
     end
     

@@ -9,7 +9,6 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
 %               % one port which is the origin. (obj.ports.origin)
 
        holes = {}; % a cell array of elements that have been subtructed to create obj. use to refer to ports
-       layer % a layer elements or the str 'multi layer'
       
 %                       
 %}               
@@ -18,12 +17,12 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
     methods (Abstract)
         draw(obj) % to be implemented in the subclasses
         convert2pol(obj) % to be implemented in the subclasses
-        set_layer(obj, layer_obj) % % to be implemented in the subclasses
     end
     methods
         % constructor.
         function [obj] = element() 
             obj.ports.origin = [0,0]; % define origin 
+            
         end
         
         % an envelope for matlab's copy()
@@ -91,7 +90,7 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
         end
         
         
-        % place obj such that the port indicated by port_name is at the
+        % place obj suvh that the port indicated by port_name is at the
         % position indicated by position_vec
         % arguments: port_name : a string
          %          position vec: a row vector of length 2.
