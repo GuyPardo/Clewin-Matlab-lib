@@ -10,25 +10,16 @@ classdef polygon_element < element
        % constructor
        function obj = polygon_element(nodes_mat)
          
+           
            obj@element(); % calling the parent (superclass) ctor, in order to initialize obj.ports.origin
            obj.nodes = nodes_mat; % defining the nodes
-          
-          
+
        end
        
        
        % draw the element using clewin's polygon().
        function [obj] = draw(obj)
-           if isempty(obj.layer)
-                obj.layer = layer(0); % if the object has no layer, put it in default layer
-           end
-           set_layer(obj.layer.id);
            polygon(obj.nodes);
-       end
-       
-       
-       function [obj] = set_layer(obj, layer_obj)
-          obj.layer = layer_obj;
        end
 
       

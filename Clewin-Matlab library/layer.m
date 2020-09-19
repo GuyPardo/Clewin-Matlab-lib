@@ -4,7 +4,8 @@ classdef layer < matlab.mixin.Copyable
     
     properties
         id % an integer 0,1,2,...
-        name % a string     
+        name % a string
+        elements % a cell array of elements to be drawn in this layer
     end
     
     methods
@@ -17,11 +18,26 @@ classdef layer < matlab.mixin.Copyable
             if nargin  > 1
                 obj.name = name;
             end
-        end
             
-           
+            obj.elements = {};
+            
 
-
+        end
+        
+        function [] = draw(obj)
+            % draws all the elements in the layer                   
+            set_layer(obj.id);
+            cellfun(@(x) x.draw(), obj.elements, 'uniformoutput', false);
+        end
+        function [obj] = append(obj, element)
+            % appends element to layer
+            obj.elements{end+1} =   element;
+        end
+        
+        function [obj] = remove(obj, element)
+            obj.elements = setdiff(obj.elements, {element})
+            
+        end
     end
 end
 

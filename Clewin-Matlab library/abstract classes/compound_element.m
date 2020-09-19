@@ -47,14 +47,6 @@ classdef compound_element < element
            pol = union(polyVec);
        end
        
-       function [obj] = set_layer(obj, layer_obj)
-           field_names = fieldnames(obj.sub_elements);
-           for k = 1:numel(field_names)
-               obj.sub_elements.(field_names{k}).set_layer(layer_obj);
-           end 
-       end
-           
-       
        
    end
        
