@@ -18,7 +18,7 @@ for i = 1:N
         x = R*cos(angle_temp);
         y = R*sin(angle_temp);
         
-        arr{i} =  copy(input_elem).place('origin',[x,y] + origin);
+        arr{i} =  input_elem.copy().place('origin',[x,y] + origin);
         if rotate
             arr{i}.rotate(angle*(i-1))
         end

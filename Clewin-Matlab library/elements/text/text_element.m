@@ -29,10 +29,14 @@ classdef text_element < element
        end
        
        function [obj] = draw(obj)
-
+            set_layer(obj.layer.id);
             text(obj.txt_str, obj.mat);
 
             
+       end
+       
+       function [obj] = set_layer(obj, layer_obj)
+            obj.layer = layer_obj;
        end
        
        function [obj] = shift(obj, shift_vec)
