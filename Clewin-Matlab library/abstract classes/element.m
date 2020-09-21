@@ -34,11 +34,11 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
      % implemented in the subclasses (e.g. polygon_element). the functions
      % here change the ports, and the function of the subclasses will change the nodes. 
         
+
+        function [obj] = shift(obj, shift_vec)
         % shifts the element rigidly.
         % inputs: shift_vec: a 2 (row) vector corresponding to the point 
         % where we want the origin of the element to move.
-        function [obj] = shift(obj, shift_vec)
-
             
            % shift all the  ports of the element:
            field_names = fieldnames(obj.ports);
@@ -48,14 +48,17 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
 
         end 
                
+
+        function [obj] = apply_transformation(obj, mat, origin)
         % apply a general linear transformation matrix to the element.
         % arguments:
         % mat : the transfomation matrix
         % origin (optional) : the origin with respect to which the
         % transformation is applied (e.g. rotation around some point).
         % by default it is the origin of the element.
-        function [obj] = apply_transformation(obj, mat, origin)
-            % initialize origin if it is nor supplied:
+           
+        
+        % initialize origin if it is nor supplied:
             if nargin < 3
                origin = obj.ports.origin;
             end
@@ -69,14 +72,15 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
            end    
         end
         
-        % same as apply_transformation, but for the specific case of a
-        % rotation tranformation 
-%         arguments:
-%         angle : angle of rotation (counter-clockwise)
-%         origin (optional): point to rotate around. by default it's the origin
-%         port of the element
-% 
+
         function [obj] = rotate(obj, angle, origin)
+%         same as apply_transformation, but for the specific case of a
+%         rotation tranformation arguments:
+%         angle : angle of rotation (counter-clockwise)
+%         origin (optional): point to rotate around. by default it's the 
+%         origin port of the element
+
+            
             % initialize origin if not supplied by user
             if nargin < 3
                 origin = obj.ports.origin;
@@ -90,18 +94,27 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
         end
         
         
-        % place obj suvh that the port indicated by port_name is at the
+
+        function  [obj] = place(obj, port_name, position_vec)
+         
+%         place obj such that the port indicated by port_name is at the
         % position indicated by position_vec
         % arguments: port_name : a string
-         %          position vec: a row vector of length 2.
+         % position vec: a row vector of length 2.
          %written by guy 2020_08_16
-        function  [obj] = place(obj, port_name, position_vec)
             shift_vec = position_vec - obj.ports.(port_name);
             obj.shift(shift_vec);
         end
         
-        function [obj] = reflect(obj, axis, origin)          
-           % initialize origin if not supplied by user
+
+        function [obj] = reflect(obj, axis, origin)
+ % same as apply_transformation, but for the specific case of a
+        % reflection tranformation
+%         arguments: axis: a 2 vector which is the axis of reflection
+%         origin (optional): a 2 vector. the  origin of the transformation.
+%         by default it's the origin port of the element
+           
+% initialize origin if not supplied by user
            if nargin<3
                origin = obj.ports.origin;
            end
@@ -126,6 +139,9 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
        end
         
        function [obj] = invert(obj, boundary_w)
+%            returns an inverted  verion of obj as an element_array.
+%            argument: boundary_w (optional, by default 0) : width of
+%            boundary to create at the bounding box of the element.
             if nargin<2
                 boundary_w = 0;
             end
