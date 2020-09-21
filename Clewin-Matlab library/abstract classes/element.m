@@ -90,7 +90,7 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
         end
         
         
-        % place obj such that the port indicated by port_name is at the
+        % place obj suvh that the port indicated by port_name is at the
         % position indicated by position_vec
         % arguments: port_name : a string
          %          position vec: a row vector of length 2.
