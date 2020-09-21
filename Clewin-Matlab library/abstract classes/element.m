@@ -99,7 +99,19 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             shift_vec = position_vec - obj.ports.(port_name);
             obj.shift(shift_vec);
         end
-        %TODO add mirror etc.
+        
+        function [obj] = reflect(obj, axis, origin)          
+           % initialize origin if not supplied by user
+           if nargin<3
+               origin = obj.ports.origin;
+           end
+           % define transformation (see https://en.wikipedia.org/wiki/Transformation_matrix#Reflection)
+           lx = axis(1);
+           ly = axis(2);
+           trans_mat = 1/(lx^2+ly^2)*[lx^2-ly^2, 2*lx*ly; 2*lx*ly, ly^2-lx^2];
+           % apply: 
+           obj.apply_transformation(trans_mat, origin);
+        end
         
 
        function [obj_out] = minus(obj1, obj2)
