@@ -1,14 +1,20 @@
+classdef rect < polygon_element
 % written by Guy 2020_08
-
+%
 % a rectangle centered at the origin with dimensions wx and wy
+%
 % ports:
+%
 % top_left, top_right, bottom_left, bottom_right : corners
 % left, right, top, bottom : centers of the edges
-
-classdef rect < polygon_element
+% note that the names of the ports refer to the rectangle when it was
+% created. they might become confusing after rotation etc. for example, if
+% you rotate the rectangle by pi/2, the port left will correspond to the
+% the bottom edge.
+    
 
    methods
-       function obj = rect(wx, wy)
+       function obj = rect(wx, wy) %ctor
            % call parent ctor
            obj@polygon_element([-wx/2, -wy/2;
                         -wx/2, wy/2;

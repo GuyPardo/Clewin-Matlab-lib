@@ -23,12 +23,6 @@ classdef coplanar_line < coplanar_element
             obj.sub_elements.top_rect = rect(length, gap_w).shift([0,trace_w/2+gap_w/2]);
             obj.sub_elements.bottom_rect = rect(length, gap_w).shift([0,-trace_w/2-gap_w/2]);
 
-%  this is a small test i did to check how compund elements work with element arrays. it can probably be deleted but i leave it for now            
-% top_rect = rect(length, gap_w).shift([0,trace_w/2+gap_w/2]);
-% bottom_rect = rect(length, gap_w).shift([0,-trace_w/2-gap_w/2]);
-% 
-% obj.sub_elements.rects = element_array([top_rect, bottom_rect]);
-
             if boundaries(1)
                 obj.sub_elements.left_cap = rect(gap_w,2*gap_w + trace_w).place('right',obj.ports.input);
             end
