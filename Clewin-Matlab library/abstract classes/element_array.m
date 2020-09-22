@@ -77,7 +77,11 @@ classdef element_array < element
            end
            
            pol = union(polyVec); % perform union with malab builtin
-       end
+        end
+       
+        function [obj] = set_layer(obj, layer_obj)
+            cellfun(@(x) x.set_layer(layer_obj),obj.elements ,'uniformoutput', false);
+        end
 
        
        

@@ -31,6 +31,11 @@ classdef polygon_element < element
            polygon(obj.nodes);
        end
        
+       function [obj] = set_layer(obj, layer_obj)
+          obj.layer = layer_obj;
+       end
+
+       
 
        function [obj] = shift(obj,shift_vec)
        % shifts the element rigidly.
