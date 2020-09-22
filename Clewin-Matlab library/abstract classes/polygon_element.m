@@ -32,6 +32,8 @@ classdef polygon_element < element
        end
        
        function [obj] = set_layer(obj, layer_obj)
+        % a set method for layer property.
+        % input should be a layer object.
           obj.layer = layer_obj;
        end
 

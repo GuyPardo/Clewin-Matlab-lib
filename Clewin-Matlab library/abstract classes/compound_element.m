@@ -78,11 +78,14 @@ classdef compound_element < element
        end
        
        function [obj] = set_layer(obj, layer_obj)
+       % set the object's layer and it's sub elements layer to layer_obj
            %TODO - use structfun instead
            field_names = fieldnames(obj.sub_elements);
            for k = 1:numel(field_names)
                obj.sub_elements.(field_names{k}).set_layer(layer_obj);
-           end 
+           end
+           
+           obj.layer = layer_obj;
         end
        
    end

@@ -80,7 +80,9 @@ classdef element_array < element
         end
        
         function [obj] = set_layer(obj, layer_obj)
+        % set the object's layer and it's sub elements layer to layer_obj.
             cellfun(@(x) x.set_layer(layer_obj),obj.elements ,'uniformoutput', false);
+            obj.layer = layer_obj;
         end
 
        
