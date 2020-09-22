@@ -47,9 +47,10 @@ classdef polygon_element < element
        % 
        % arguments:
        %               
-       % mat : the transfomation matrix origin (optional) : the origin with
-       % respect to which the transformation is applied (e.g. rotation
-       % around some point). by default it is the origin of the element.
+       % mat : the transfomation matrix
+       % origin (optional) : the origin with respect to which the
+       % transformation is applied (e.g. rotation around some point). by
+       % default it is the origin of the element.
            
            % define origin if it's not supplied by user
            if nargin < 3
@@ -66,8 +67,7 @@ classdef polygon_element < element
        end
        
        function [pol] = convert2pol(obj)
-       % converts obj to a matlab polyshape object.
-       
+       % converts the element to a matlab polyshape object.  
            pol = elem2pol(obj); % elem2pol is implemented in the utility folder
        end
        
