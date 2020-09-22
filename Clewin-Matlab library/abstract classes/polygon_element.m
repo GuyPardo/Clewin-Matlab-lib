@@ -22,8 +22,21 @@ classdef polygon_element < element
        % when run from clewin, it uses clewin's polygon() function.
        % if run from matlab, it uses the polygon() function from the
        % excluded_folder to plot the element in the current figure window
+       % if the polygon_element layer property is not defined, it is drawn
+       % in the layer with index 0 in clewin.
+           if isempty(obj.layer)
+                obj.layer = layer(0); % if the object has no layer, put it in default layer
+           end
+           set_layer(obj.layer.id);
            polygon(obj.nodes);
        end
+       
+       function [obj] = set_layer(obj, layer_obj)
+        % a set method for layer property.
+        % input should be a layer object.
+          obj.layer = layer_obj;
+       end
+
        
 
        function [obj] = shift(obj,shift_vec)

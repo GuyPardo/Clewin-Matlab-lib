@@ -14,6 +14,7 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
        % subtructed to create the element. use to refer to ports etc.
        % see method element.minus
        holes = {}; 
+       layer % a layer elements. for multi layer element, leave empty.
       
 %                       
 %}               
@@ -22,6 +23,7 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
     methods (Abstract)
         draw(obj) % to be implemented in the subclasses
         convert2pol(obj) % to be implemented in the subclasses
+        set_layer(obj, layer_obj) % % to be implemented in the subclasses
     end
     methods
 
