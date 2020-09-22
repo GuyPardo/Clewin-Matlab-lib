@@ -1,3 +1,4 @@
+classdef coplanar_meander < coplanar_element
 %   written by Guy 2020_08
 %   a meandering coplanar line. all dimensions are in microns 
 %   trace_w: width of the trace (metal) 
@@ -11,9 +12,7 @@
 %  ports:
 %  input
 %  output
-%  center=origin
-
-classdef coplanar_meander < coplanar_element
+%  center=origin    
    properties
       length
       N

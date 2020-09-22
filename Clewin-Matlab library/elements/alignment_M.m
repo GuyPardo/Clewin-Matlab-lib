@@ -1,6 +1,7 @@
+
+classdef alignment_M  < compound_element
 % written by Samuel, 30.08.20
 % Alignment Marks
-classdef alignment_M  < compound_element
     methods
         function [obj] = alignment_M(R)
             
@@ -30,7 +31,7 @@ classdef alignment_M  < compound_element
            obj.sub_elements.RectArr_LeftUP   =RectArr.shift([-100,100]);
            obj.sub_elements.RectArr_Leftdown =RectArr.copy.shift([0,-200]);
            obj.sub_elements.RectArr_rightdow =RectArr.copy.shift([200,0]);
-           obj.sub_elements.RectArr_rightUp  =RectArr.copy.shift([200,-200])
+           obj.sub_elements.RectArr_rightUp  =RectArr.copy.shift([200,-200]);
            
         end
     end

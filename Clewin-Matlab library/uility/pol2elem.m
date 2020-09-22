@@ -1,5 +1,5 @@
 function [elem] = pol2elem(pol)
-%written by Guy 2020_08_29 returns an elemet_array or a polygon_element
+% written by Guy 2020_08_29 returns an elemet_array or a polygon_element
 
 
 rgns = regions(pol); % regions of pol

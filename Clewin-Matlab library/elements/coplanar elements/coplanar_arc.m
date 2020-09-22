@@ -1,11 +1,12 @@
+
+classdef coplanar_arc < coplanar_element
 % written by Guy 2020_08_16
 % a cicular coplanar-arc defined by a radius R,  an angle and trace_w, and gap_w, starting from the positive x
 % direction and going counterclockwise. 
 % ports:
 % center = origin - the center of the circle
 % output : the edge at positive x
-% input : the other edge
-classdef coplanar_arc < coplanar_element
+% input : the other edge    
    properties
       R
       angle

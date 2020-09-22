@@ -1,3 +1,5 @@
+
+classdef coplanar_element < compound_element
 % written by Guy 2020_08
 % an abstract coplanat element with some trace and some gap.
 % boundaries is a 2 row vector defining the boundarie of the coplanar
@@ -5,7 +7,7 @@
 % on the right etc..
 % this has to be implemented in the constructor of the specific element.
 % for an example see coplanar_line.m
-classdef coplanar_element < compound_element
+% TODO - think about whther this class is necessary 
     properties
         trace_w
         gap_w

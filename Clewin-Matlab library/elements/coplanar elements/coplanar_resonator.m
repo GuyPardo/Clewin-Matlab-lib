@@ -1,8 +1,9 @@
-%written by Guy 2020_08
-% a meandering coplanar resonator built with total length total_l.
+
+classdef coplanar_resonator < coplanar_element
+% written by Guy 2020_08
+% a meandering coplanar resonator with total length total_l.
 %  built from a coplanar_meander and additional coplanar_lines to reach the
 %  desired total_l
-classdef coplanar_resonator < coplanar_element
    properties
        length
    end

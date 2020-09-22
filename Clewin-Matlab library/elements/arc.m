@@ -1,22 +1,31 @@
-% written by Guy 2020_08_16
-% a cicular arc defined by a radius R,  an angle and width, starting from the positive x
-% direction and going counterclockwise. 
+classdef arc < polygon_element
+% written by Guy 2020_08_16 a cicular arc defined by a radius R,  an angle
+% and width, starting from the positive x direction and going
+% counterclockwise.
+%
 % ports:
+%
 % center = origin - the center of the circle
 % output : the edge at positive x
 % input : the other edge
 % TODO : maybe we also want middle?
-
-classdef arc < polygon_element
     properties
-        R
-        angle
+        R % radius
+        angle 
         width
         length
     end
     
     methods
-        function [obj] = arc(R, angle,width, res)
+        function [obj] = arc(R, angle,width, res) % ctor
+            % creates an arc element
+            %
+            % inputs:
+            % R - radius of the arc
+            % angle - angle of the arc
+            % width - width of the arc
+            % res (optional, by default = 100) - resolution (no. of points)
+            
            if nargin < 4
                res = 100;
            end

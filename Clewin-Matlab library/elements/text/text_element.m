@@ -1,7 +1,7 @@
-% written by Guy, 2020_08_23
-%an element for dealing with text and annotations 
-%note that the origin of a text in clewin is the lower left corner
 classdef text_element < element
+% written by Guy, 2020_08_23
+% an element for dealing with text and annotations 
+% note that the origin of a text in clewin is the lower left corner    
    properties
        size % approximate text height in microns, = 100 by default
        txt_str
