@@ -1,6 +1,15 @@
 function [output_elem] = duplicate_circ(input_elem,angle, N,origin, rotate)
 %written by Guy 2020_08_28
-%   returns an element_array .
+%   returns an element_array which is a circular  array of copies of
+%   input_elem
+%
+%   input arguments:
+%   input_elem : any element object
+%   angle : the angle between successive copies 
+%   N : number of copies
+%   origin : the origin for the circle, given as a 2 vector
+%   rotate(optional): a boolian. if true, the copies are also rotated about
+%   their respective origins. by default it is true.
 if nargin < 4
     origin = [0,0];
 end
