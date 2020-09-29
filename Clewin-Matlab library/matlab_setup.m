@@ -10,5 +10,6 @@ full_name =  matlab.desktop.editor.getActiveFilename;
 addpath(genpath(lib_path));
 
  savepath
-% 
+%
+clearvars
 
