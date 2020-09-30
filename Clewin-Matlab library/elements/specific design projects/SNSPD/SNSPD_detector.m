@@ -1,5 +1,5 @@
-classdef detector < compound_element
-    %DETECTOR is an SNSPD_meander with an adiabatic opening
+classdef SNSPD_detector < compound_element
+    % an SNSPD_meander with an adiabatic opening
     %   rotated by 90 degrees such that the opening is above the meander
     %
     % ports:
@@ -22,7 +22,7 @@ classdef detector < compound_element
     
     
     methods
-        function obj = detector(trace_w, gap_w, segment_l,adiabatic_l, final_w)
+        function obj = SNSPD_detector(trace_w, gap_w, segment_l,adiabatic_l, final_w)
             %DETECTOR Construct an instance of this class.
             
             % default configurations:
