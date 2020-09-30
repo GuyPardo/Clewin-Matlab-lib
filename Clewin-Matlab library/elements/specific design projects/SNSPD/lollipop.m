@@ -1,5 +1,18 @@
 classdef lollipop < compound_element
-    %lollipop the lollipop shape for bosch layer in SNSPD
+    % lollipop shape for bosch layer in SNSPD
+    % composed of a circular arc, a neck which is a short coplanar line and
+    % then a long coplanar adiabatic opening, and a "stop" (a small
+    % rectangle) at the end for easy breaking.
+    %
+    % ctop input arguments:
+    % (running lollipop() gives the default parameters)
+%                 diameter = 2497  
+%                 cut_w = 200; 
+%                 neck_w = 400;
+%                 neck_l = 500;
+%                 adiabatic_l = 3000;
+%                 final_w = 900;
+%                 stop_l = final_w/2; 
     
     
     properties
