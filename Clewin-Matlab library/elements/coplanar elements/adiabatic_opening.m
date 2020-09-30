@@ -1,6 +1,8 @@
 classdef adiabatic_opening < compound_element
     %adiabatic_opening coplanar adiabatic opening
-    %   Detailed explanation goes here
+    %   ports:
+    %   input
+    %   output
     
     properties
         length
@@ -43,7 +45,7 @@ classdef adiabatic_opening < compound_element
                  obj.sub_elements.bottom = obj.sub_elements.top.copy().reflect([1,0]);
                  
                  % defining ports
-                 obj.ports.input = [-length\2,0];
+                 obj.ports.input = [-length/2,0];
                  obj.ports.output = [length/2,0];
                  
         end
