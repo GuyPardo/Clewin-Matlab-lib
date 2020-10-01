@@ -31,7 +31,7 @@ classdef adiabatic_opening < compound_element
             obj.trace_w_out = trace_w_out;
             obj.gap_w_in = gap_w_in;
             obj.gap_w_out = gap_w_out;
-            
+            obj.length = length;
             % building element
                 % defining basic polygon
                  pol_nodes = [0 trace_w_in/2;

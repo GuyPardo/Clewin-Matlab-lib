@@ -1,17 +1,18 @@
 classdef SNSPD_full < compound_element
     %SNSPD_FULL a full (single) detector design
-    %   made out of an SNSPD_detector in layer 0, an SNSPD_feedline in
-    %   layers 1 and 2,  and SNSPD_window in layer 3  a lollipop in layer 4
+    %   made out of an SNSPD_detector in layer 2, an SNSPD_feedline in
+    %   layer 0 , a window in layer 1 and a lollipop in layer 3
     % 
     % input arguments for constructor: 4 elements: an SNSPD_detector,an
     % SNSPD_feedline,an SNSPD_lollipop, and some element for the shape of
     % the window in Al.
-    % if run without argumets SNSPD_full() : uses default
+    % if run without argumets: SNSPD_full() : uses default
     % elements.
     %
     % ports:
     % origin : the center of the detector
     % pad : the center of contact pad
+    % center : geometric cencter of the whole element
     
     methods
         function obj = SNSPD_full(detector, feedline, lollipop, window)
@@ -42,12 +43,17 @@ classdef SNSPD_full < compound_element
             
             % define sub elements
             obj.sub_elements.detector = detector.set_layer(L2);
-            obj.sub_elements.feedline = feedline.set_layer(L0).place('input',obj.sub_elements.detector.ports.input - [0,10] );
+            obj.sub_elements.feedline = feedline.set_layer(L0).place('input',obj.sub_elements.detector.ports.input - [0,10] ); % the shift is for tolerance
             obj.sub_elements.lollipop = lollipop.set_layer(L3);
             obj.sub_elements.window = window.set_layer(L1);
             
             % define ports
             obj.ports.pad = obj.sub_elements.feedline.ports.pad;
+            % define center
+            %   find boundnding box
+                    [x,y ] = boundingbox(obj.convert2pol);
+            obj.ports.center = [mean(x), mean(y)];
+            
         end
         
     end
