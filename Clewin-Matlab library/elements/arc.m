@@ -8,9 +8,15 @@ classdef arc < polygon_element
 % center = origin - the center of the circle
 % output : the edge at positive x
 % input : the other edge
-% TODO : maybe we also want middle?
+% input_inner : the inner corner of the input edge
+% input_outer : the outer corner of the input edge
+% output_inner : the inner corner of the output edge
+% output_outer : the outer corner of the output edge
+
     properties
         R % radius
+        R_in % inner radius
+        R_out % outer radius
         angle 
         width
         length
@@ -37,12 +43,17 @@ classdef arc < polygon_element
            obj.angle = angle;
            obj.width = width;
            obj.length = angle*R;
+           obj.R_in = R-width/2;
+           obj.R_out = R+width/2;
            
            % define ports
            obj.ports.center = [0,0];
            obj.ports.input = [R*cos(angle),R*sin(angle)];
            obj.ports.output = [R,0];
-           
+           obj.ports.output_inner = [obj.R_in, 0];
+           obj.ports.output_outer = [obj.R_out, 0];
+           obj.ports.input_inner = [obj.R_in*cos(angle), obj.R_in*sin(angle)];
+           obj.ports.input_outer = [obj.R_out*cos(angle), obj.R_out*sin(angle)];
            
         end
     end
