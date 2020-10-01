@@ -29,6 +29,10 @@ classdef text_element < element
        end
        
        function [obj] = draw(obj)
+           if isempty(obj.layer)
+                obj.layer = layer(0); % if the object has no layer, put it in default layer
+           end
+
             set_layer(obj.layer.id);
             text(obj.txt_str, obj.mat);
             
