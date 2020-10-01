@@ -7,6 +7,7 @@ classdef alignment_M  < compound_element
         function [obj] = alignment_M(R, text_str)
             
             if nargin<1
+                text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
                 R=30;
                 text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
                 
