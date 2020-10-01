@@ -1,12 +1,16 @@
 
 classdef alignment_M  < compound_element
 % written by Samuel, 30.08.20
+% editted by Guy, 01.10.20
 % Alignment Marks
     methods
-        function [obj] = alignment_M(R)
+        function [obj] = alignment_M(R, text_str)
             
             if nargin<1
                 R=30;
+            end
+            if nargin<2
+                txt_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
             end
             % call parent constructor
            obj@compound_element();
@@ -32,6 +36,9 @@ classdef alignment_M  < compound_element
            obj.sub_elements.RectArr_Leftdown =RectArr.copy.shift([0,-200]);
            obj.sub_elements.RectArr_rightdow =RectArr.copy.shift([200,0]);
            obj.sub_elements.RectArr_rightUp  =RectArr.copy.shift([200,-200]);
+           
+           % GUY - add text label:
+           obj.sub_elements.text = text_element(text_str, R).shift([-150, 150]);
            
         end
     end
