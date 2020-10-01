@@ -38,7 +38,7 @@ classdef alignment_M  < compound_element
            obj.sub_elements.RectArr_rightUp  =RectArr.copy.shift([200,-200]);
            
            % GUY - add text label:
-           obj.sub_elements.text = text_element(text_str, R).shift([-150, 150]);
+           obj.sub_elements.text = text_element(text_str, R*1.2).shift([-50, 150]);
            
         end
     end
