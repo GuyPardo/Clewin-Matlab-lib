@@ -7,10 +7,11 @@ classdef alignment_M  < compound_element
         function [obj] = alignment_M(R, text_str)
             
             if nargin<1
+                text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
                 R=30;
             end
             if nargin<2
-                txt_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
+                text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
             end
             % call parent constructor
            obj@compound_element();
