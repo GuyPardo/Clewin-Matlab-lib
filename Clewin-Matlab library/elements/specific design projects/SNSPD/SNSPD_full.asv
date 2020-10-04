@@ -1,0 +1,51 @@
+classdef SNSPD_full < compound_element
+    %SNSPD_FULL a full (single) detector design
+    %   made out of an SNSPD_detector in layer 0, an SNSPD_feedline in
+    %   layers 1 and 2,  and SNSPD_window in layer 3  a lollipop in layer 4
+
+    
+    methods
+        function obj = SNSPD_full(detector, feedline, lollipop, window)
+            %SNSPD_FULL Construct an instance of this class
+            
+            if nargin<1
+                detector  = SNSPD_detector();
+                feedline = SNSPD_feedline();
+                lollipop = SNSPD_lollipop();
+                
+                %  window in al
+                a = 8;
+                
+                nodes = [-a -a;
+                          a -a;
+                          a a
+                          b b;
+                         -b b;
+                         -a a];
+    
+    
+                window = polygon_element(nodes);
+                
+            end
+            
+            % layers:
+            L0 = layer(0,'etch Al + WSi - LW');
+            L1 = layer(1, 'etch Al - LW');
+            L2 = layer(2, 'etch WSi - eLine');
+            L3 = layer(3,'Bosch - Mask');
+            
+            obj.sub_elements.detector = detector.set_layer(L2);
+            obj.sub_elements.feedline = feedline.set_layer(L0).place('input',obj.sub_elements.detector.ports.input - [0,10] );
+            obj.sub_elements.lollipop = lollipop.set_layer(L3);
+            obj.sub_elements.window = window.set_layer(L1);
+            
+        end
+        
+        function outputArg = method1(obj,inputArg)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            outputArg = obj.Property1 + inputArg;
+        end
+    end
+end
+

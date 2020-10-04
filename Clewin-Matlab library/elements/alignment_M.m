@@ -9,6 +9,8 @@ classdef alignment_M  < compound_element
             if nargin<1
                 text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
                 R=30;
+                text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
+                
             end
             if nargin<2
                 text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
