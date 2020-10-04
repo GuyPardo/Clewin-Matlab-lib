@@ -13,11 +13,7 @@ classdef compound_element < element
        % if run from matlab, it uses the polygon() function from the
        % excluded_folder to plot the element in the current figure window
            
-           % TODO - try using structfun instead
-           field_names = fieldnames(obj.sub_elements);
-           for k = 1:numel(field_names)
-               obj.sub_elements.(field_names{k}).draw();
-           end
+         structfun(@(x) x.draw(), obj.sub_elements, 'uniformoutput', false); % draw() each sub_element
        end
        
        function [obj] = shift(obj, shift_vec)
@@ -32,11 +28,7 @@ classdef compound_element < element
             shift@element(obj, shift_vec);
             
             % shift the sub_elements
-            % TODO - try using structfun instead
-            field_names = fieldnames(obj.sub_elements);
-            for k = 1:numel(field_names)
-               obj.sub_elements.(field_names{k}).shift(shift_vec);
-            end
+            structfun(@(x) x.shift(shift_vec), obj.sub_elements, 'uniformoutput',false);
        end
        
        function [obj] = apply_transformation(obj,mat, origin)
@@ -59,32 +51,22 @@ classdef compound_element < element
        
        % transform the sub-elements
        % TODO - try using structfun instead
-            field_names = fieldnames(obj.sub_elements);
-            for k = 1:numel(field_names)
-                obj.sub_elements.(field_names{k}).apply_transformation(mat,origin);
-            end  
+%             field_names = fieldnames(obj.sub_elements);
+%             for k = 1:numel(field_names)
+%                 obj.sub_elements.(field_names{k}).apply_transformation(mat,origin);
+%             end  
+        structfun(@(x) x.apply_transformation(mat, origin), obj.sub_elements, 'uniformoutput', false);
        end
        
        function [pol] = convert2pol(obj)
        % converts the element to a matlab polyshape object.          
-           
-            % TODO - try using structfun
-            field_names = fieldnames(obj.sub_elements);
-            for k = 1:numel(field_names)
-                polyVec(k) = obj.sub_elements.(field_names{k}).convert2pol();
-            end
-           
+            polyVec = structfun(@(x) x.convert2pol(), obj.sub_elements);            
             pol = union(polyVec);
        end
        
        function [obj] = set_layer(obj, layer_obj)
        % set the object's layer and it's sub elements layer to layer_obj
-           %TODO - use structfun instead
-           field_names = fieldnames(obj.sub_elements);
-           for k = 1:numel(field_names)
-               obj.sub_elements.(field_names{k}).set_layer(layer_obj);
-           end
-           
+           structfun(@(x) x.set_layer(layer_obj), obj.sub_elements, 'uniformoutput', false);          
            obj.layer = layer_obj;
         end
        
@@ -101,11 +83,7 @@ classdef compound_element < element
             obj_copy = copyElement@element(obj); % copying the element
            
            % copying the sub_elements
-           % TODO - try using structfun
-           sub_elements_names = fieldnames(obj_copy.sub_elements);
-           for k=1:numel(sub_elements_names)
-                obj_copy.sub_elements.(sub_elements_names{k}) = copyElement(obj.sub_elements.(sub_elements_names{k}));
-           end 
+            obj_copy.sub_elements = structfun(@copyElement, obj.sub_elements, 'uniformoutput', false);
         end
        
    end
