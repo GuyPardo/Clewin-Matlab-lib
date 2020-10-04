@@ -13,7 +13,7 @@ classdef SNSPD_feedline < compound_element
     % line_w : width of coplanar line part
     %
     % running SNSPD_feedline() gives the default setting:
-    %  line_l = 4100; line_w = 80;
+    %  line_l = 3750; line_w = 80;
     
 
     
@@ -21,7 +21,7 @@ classdef SNSPD_feedline < compound_element
         function obj = SNSPD_feedline(line_l,line_w)
             %SNSPD_FEEDLINE Construct an instance of this class
             if nargin<1
-                line_l = 4100; line_w = 80;
+                line_l = 3750; line_w = 80;
             end
             
             % line

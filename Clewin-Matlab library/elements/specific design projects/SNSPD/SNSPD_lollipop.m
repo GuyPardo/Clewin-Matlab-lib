@@ -10,7 +10,7 @@ classdef SNSPD_lollipop < compound_element
 %                 cut_w = 200; 
 %                 neck_w = 400;
 %                 neck_l = 500;
-%                 adiabatic_l = 3000;
+%                 adiabatic_l = 3050;
 %                 final_w = 900;
 %                 stop_l = final_w/2; 
     
@@ -26,7 +26,7 @@ classdef SNSPD_lollipop < compound_element
                 cut_w = 200; 
                 neck_w = 400;
                 neck_l = 500;
-                adiabatic_l = 3500;
+                adiabatic_l = 3050;
                 final_w = 900;
                 stop_l = final_w/2; 
             end
