@@ -49,11 +49,7 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
         % shift@polygon_element shifts the nodes.
             
            % shift all the  ports of the element:
-           % TODO -  try  to use structfun instead
-           field_names = fieldnames(obj.ports);
-           for k = 1:numel(field_names)
-               obj.ports.(field_names{k}) = obj.ports.(field_names{k}) + shift_vec; 
-           end
+            obj.ports = structfun(@(x) x + shift_vec, obj.ports, 'uniformoutput', false);
 
         end 
                
@@ -79,13 +75,10 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             end
             
             % transform the ports
-            % TODO -  try  to use structfun instead
-           field_names = fieldnames(obj.ports);
-           for k = 1:numel(field_names)
-                obj.ports.(field_names{k}) = obj.ports.(field_names{k}) - origin; 
-                obj.ports.(field_names{k}) = transpose(mat*transpose(obj.ports.(field_names{k})));
-                obj.ports.(field_names{k}) = obj.ports.(field_names{k}) + origin;
-           end    
+           obj.ports = structfun(@(x) x - origin, obj.ports, 'uniformoutput', false);
+           obj.ports = structfun(@(x) transpose(mat*transpose(x)), obj.ports,'uniformoutput', false );
+           obj.ports = structfun(@(x) x + origin, obj.ports, 'uniformoutput', false);
+           
         end
         
 
