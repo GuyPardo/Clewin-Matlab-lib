@@ -1,6 +1,7 @@
 %% full design
-
-% detector array
+% written by Guy in the new library the alignment marks (other than the id
+% marks) and the wafer bound  can still be drawn with the old scripts
+% the detectors and the id marks are defined here. 
 array_size = [4,6];
 spacing = [8000,5000];
 SNSPD = SNSPD_full().place('center', [0,0]);
