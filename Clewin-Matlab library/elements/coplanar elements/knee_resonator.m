@@ -1,6 +1,9 @@
-classdef knee_resonator < coplanar_element 
+classdef knee_resonator < compound_element 
    properties
        length
+       trace_w
+       gap_w
+       boundaries
    end
    
    methods

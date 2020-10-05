@@ -1,4 +1,4 @@
-classdef coplanar_meander < coplanar_element
+classdef coplanar_meander < compound_element
 %   written by Guy 2020_08
 %   a meandering coplanar line. all dimensions are in microns 
 %   trace_w: width of the trace (metal) 
@@ -16,12 +16,19 @@ classdef coplanar_meander < coplanar_element
    properties
       length
       N
+      trace_w
+      gap_w
+      boundaries
    end
    
    
    methods
        function [obj] = coplanar_meander(trace_w, gap_w, segment_l, distance, N, boundaries)
-        R = distance/2;
+        
+        
+           
+           
+         R = distance/2;
         if N<3
             segment_l = 2*segment_l + 2*R;
         end

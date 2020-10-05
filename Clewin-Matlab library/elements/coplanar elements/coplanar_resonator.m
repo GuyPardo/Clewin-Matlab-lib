@@ -1,11 +1,14 @@
 
-classdef coplanar_resonator < coplanar_element
+classdef coplanar_resonator < compound_element
 % written by Guy 2020_08
 % a meandering coplanar resonator with total length total_l.
 %  built from a coplanar_meander and additional coplanar_lines to reach the
 %  desired total_l
    properties
-       length
+      length
+      trace_w
+      gap_w
+      boundaries       
    end
    
    methods
