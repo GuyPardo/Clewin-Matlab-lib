@@ -3,7 +3,7 @@ classdef compound_element < element
 % an element that is made out of several sub_elements
 % written by Guy 2020_08_16
    properties
-       sub_elements % a struct which has fields that are elements (they can be any kind of element).
+       elements % a struct which has fields that are elements (they can be any kind of element).
    end
    
    methods
@@ -13,7 +13,7 @@ classdef compound_element < element
        % if run from matlab, it uses the polygon() function from the
        % excluded_folder to plot the element in the current figure window
            
-         structfun(@(x) x.draw(), obj.sub_elements, 'uniformoutput', false); % draw() each sub_element
+         structfun(@(x) x.draw(), obj.elements, 'uniformoutput', false); % draw() each sub_element
        end
        
        function [obj] = shift(obj, shift_vec)
@@ -28,7 +28,7 @@ classdef compound_element < element
             shift@element(obj, shift_vec);
             
             % shift the sub_elements
-            structfun(@(x) x.shift(shift_vec), obj.sub_elements, 'uniformoutput',false);
+            structfun(@(x) x.shift(shift_vec), obj.elements, 'uniformoutput',false);
        end
        
        function [obj] = apply_transformation(obj,mat, origin)
@@ -55,18 +55,18 @@ classdef compound_element < element
 %             for k = 1:numel(field_names)
 %                 obj.sub_elements.(field_names{k}).apply_transformation(mat,origin);
 %             end  
-        structfun(@(x) x.apply_transformation(mat, origin), obj.sub_elements, 'uniformoutput', false);
+        structfun(@(x) x.apply_transformation(mat, origin), obj.elements, 'uniformoutput', false);
        end
        
        function [pol] = convert2pol(obj)
        % converts the element to a matlab polyshape object.          
-            polyVec = structfun(@(x) x.convert2pol(), obj.sub_elements);            
+            polyVec = structfun(@(x) x.convert2pol(), obj.elements);            
             pol = union(polyVec);
        end
        
        function [obj] = set_layer(obj, layer_obj)
        % set the object's layer and it's sub elements layer to layer_obj
-           structfun(@(x) x.set_layer(layer_obj), obj.sub_elements, 'uniformoutput', false);          
+           structfun(@(x) x.set_layer(layer_obj), obj.elements, 'uniformoutput', false);          
            obj.layer = layer_obj;
         end
        
@@ -83,7 +83,7 @@ classdef compound_element < element
             obj_copy = copyElement@element(obj); % copying the element
            
            % copying the sub_elements
-            obj_copy.sub_elements = structfun(@copyElement, obj.sub_elements, 'uniformoutput', false);
+            obj_copy.elements = structfun(@copyElement, obj.elements, 'uniformoutput', false);
         end
        
    end
