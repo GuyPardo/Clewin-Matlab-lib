@@ -21,18 +21,18 @@ classdef walking_cane < compound_element
                 % place arc
                 arc.place('input', line.ports.output);
 
-                % build the object by defining obj.sub_elements: 
-                obj.sub_elements.arc = arc;
-                obj.sub_elements.line = line;
+                % build the object by defining obj.elements: 
+                obj.elements.arc = arc;
+                obj.elements.line = line;
                 
             %2.  define properties
-                obj.length = obj.sub_elements.arc.length + obj.sub_elements.line.length;
+                obj.length = obj.elements.arc.length + obj.elements.line.length;
                 obj.trace_w = trace_w;
                 obj.gap_w = gap_w;
             
             %3. define ports
-                obj.ports.input = obj.sub_elements.line.ports.input;
-                obj.ports.output = obj.sub_elements.arc.ports.output;
+                obj.ports.input = obj.elements.line.ports.input;
+                obj.ports.output = obj.elements.arc.ports.output;
         end
        
     end

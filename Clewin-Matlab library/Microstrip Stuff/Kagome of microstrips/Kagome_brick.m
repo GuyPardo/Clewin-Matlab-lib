@@ -9,14 +9,14 @@ classdef Kagome_brick  < compound_element
            % call parent constructor
            obj@compound_element();
            
-           obj.sub_elements.triangleU      = KagomeTriangle;
-           obj.sub_elements.triangleD      = obj.sub_elements.triangleU.copy().rotate(pi);
-           obj.sub_elements.triangleLU     = KagomeTriangle.copy();
-           obj.sub_elements.triangleLD     = obj.sub_elements.triangleU.copy().rotate(pi);
+           obj.elements.triangleU      = KagomeTriangle;
+           obj.elements.triangleD      = obj.elements.triangleU.copy().rotate(pi);
+           obj.elements.triangleLU     = KagomeTriangle.copy();
+           obj.elements.triangleLD     = obj.elements.triangleU.copy().rotate(pi);
            
-           obj.sub_elements.triangleU.place("top",obj.sub_elements.triangleD.ports.top);
-           obj.sub_elements.triangleLU.place("right",obj.sub_elements.triangleD.ports.right);
-           obj.sub_elements.triangleLD.place("top",obj.sub_elements.triangleLU.ports.top);
+           obj.elements.triangleU.place("top",obj.elements.triangleD.ports.top);
+           obj.elements.triangleLU.place("right",obj.elements.triangleD.ports.right);
+           obj.elements.triangleLD.place("top",obj.elements.triangleLU.ports.top);
            
         end
     end

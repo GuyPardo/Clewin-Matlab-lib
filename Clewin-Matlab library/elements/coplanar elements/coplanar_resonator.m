@@ -36,23 +36,23 @@ classdef coplanar_resonator < coplanar_element
           N = n-1;
           
           % defining meander
-          obj.sub_elements.meander = coplanar_meander(trace_w, gap_w, segment_l,distance, N);
+          obj.elements.meander = coplanar_meander(trace_w, gap_w, segment_l,distance, N);
           
           % calculation extra length needed:
-          add_l = total_l - obj.sub_elements.meander.length;
+          add_l = total_l - obj.elements.meander.length;
           
           % adding lines
-          obj.sub_elements.line_in = coplanar_line(add_l/2, trace_w, gap_w, [boundaries(1),0]).place('output',obj.sub_elements.meander.ports.input);
-          obj.sub_elements.line_out = coplanar_line(add_l/2, trace_w, gap_w, [0,boundaries(2)]).place('input',obj.sub_elements.meander.ports.output);
+          obj.elements.line_in = coplanar_line(add_l/2, trace_w, gap_w, [boundaries(1),0]).place('output',obj.elements.meander.ports.input);
+          obj.elements.line_out = coplanar_line(add_l/2, trace_w, gap_w, [0,boundaries(2)]).place('input',obj.elements.meander.ports.output);
           
           % defining ports
-          obj.ports.input = obj.sub_elements.line_in.ports.input;
-          obj.ports.output = obj.sub_elements.line_out.ports.output;
-          obj.ports.center = obj.sub_elements.meander.ports.center;
+          obj.ports.input = obj.elements.line_in.ports.input;
+          obj.ports.output = obj.elements.line_out.ports.output;
+          obj.ports.center = obj.elements.meander.ports.center;
           
           obj.trace_w = trace_w;
           obj.gap_w = gap_w;
-          obj.length = obj.sub_elements.meander.get_length() + add_l;
+          obj.length = obj.elements.meander.get_length() + add_l;
          end
           
        end

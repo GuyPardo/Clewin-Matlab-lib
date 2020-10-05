@@ -61,14 +61,14 @@ classdef coplanar_meander < coplanar_element
                      
             
             arcs_array = [arcs_array, {arc_out}];
-            obj.sub_elements.lines = element_array(lines_array);
-            obj.sub_elements.arcs  = element_array(arcs_array);
+            obj.elements.lines = element_array(lines_array);
+            obj.elements.arcs  = element_array(arcs_array);
             
             
             % define other ports
-            obj.ports.output = obj.sub_elements.arcs.elements{end}.ports.output;
+            obj.ports.output = obj.elements.arcs.elements{end}.ports.output;
             obj.ports.center = obj.ports.origin;
-            obj.ports.input = obj.sub_elements.arcs.elements{1}.ports.input;
+            obj.ports.input = obj.elements.arcs.elements{1}.ports.input;
             
             obj.length = obj.get_length();
             obj.trace_w = trace_w;
@@ -79,12 +79,12 @@ classdef coplanar_meander < coplanar_element
        
        function [len] = get_length(obj)
            len=0; 
-           for i = 1:numel(obj.sub_elements.lines.elements)
-            len = len + obj.sub_elements.lines.elements{i}.length;   
+           for i = 1:numel(obj.elements.lines.elements)
+            len = len + obj.elements.lines.elements{i}.length;   
            end
            
-           for j = 1:numel(obj.sub_elements.arcs.elements)
-            len = len + obj.sub_elements.arcs.elements{j}.length;   
+           for j = 1:numel(obj.elements.arcs.elements)
+            len = len + obj.elements.arcs.elements{j}.length;   
            end
 
 

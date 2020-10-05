@@ -34,15 +34,15 @@ classdef coplanar_arc < coplanar_element
             obj.ports.input = [R*cos(angle),R*sin(angle)];
             obj.ports.output = [R,0];
             
-            obj.sub_elements.outer = arc(R + trace_w/2 + gap_w/2,angle, gap_w,res);
-            obj.sub_elements.inner = arc(R - trace_w/2 - gap_w/2,angle, gap_w,res);
+            obj.elements.outer = arc(R + trace_w/2 + gap_w/2,angle, gap_w,res);
+            obj.elements.inner = arc(R - trace_w/2 - gap_w/2,angle, gap_w,res);
             
             if boundaries(1)
-                obj.sub_elements.input_cap = rect(gap_w,2*gap_w + trace_w).rotate(-(pi/2-angle)).place('right',obj.ports.input);
+                obj.elements.input_cap = rect(gap_w,2*gap_w + trace_w).rotate(-(pi/2-angle)).place('right',obj.ports.input);
             end
             
             if boundaries(2)
-                obj.sub_elements.output_cap = rect(gap_w,2*gap_w + trace_w).rotate(pi/2).place('right',obj.ports.output);
+                obj.elements.output_cap = rect(gap_w,2*gap_w + trace_w).rotate(pi/2).place('right',obj.ports.output);
             end
 
         end

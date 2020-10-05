@@ -48,10 +48,10 @@ classdef SNSPD_lollipop < compound_element
             % stop
             stop = rect(stop_l,cut_w);
             
-            obj.sub_elements.circ = circ;
-            obj.sub_elements.neck = neck.place('input',(obj.sub_elements.circ.ports.input_inner+obj.sub_elements.circ.ports.output_inner)/2 );
-            obj.sub_elements.adiabatic = adiabatic.place('input', obj.sub_elements.neck.ports.output);
-            obj.sub_elements.stop = stop.place('bottom', obj.sub_elements.adiabatic.ports.output);
+            obj.elements.circ = circ;
+            obj.elements.neck = neck.place('input',(obj.elements.circ.ports.input_inner+obj.elements.circ.ports.output_inner)/2 );
+            obj.elements.adiabatic = adiabatic.place('input', obj.elements.neck.ports.output);
+            obj.elements.stop = stop.place('bottom', obj.elements.adiabatic.ports.output);
         end
         
     end

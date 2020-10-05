@@ -13,7 +13,7 @@ id_am_arr =  duplicate(id_am, array_size,spacing);
 for i=1:array_size(1)
     for j=1:array_size(2)
         txt_str = sprintf('id %d%d', array_size(1)-i+1,j);
-        id_am_arr.elements{i,j}.sub_elements.text.txt_str = txt_str;
+        id_am_arr.elements{i,j}.elements.text.txt_str = txt_str;
     end
 end
 
