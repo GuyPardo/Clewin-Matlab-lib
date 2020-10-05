@@ -42,13 +42,13 @@ classdef SNSPD_full < compound_element
             L3 = layer(3,'Bosch - Mask');
             
             % define sub elements
-            obj.sub_elements.detector = detector.set_layer(L2);
-            obj.sub_elements.feedline = feedline.set_layer(L0).place('input',obj.sub_elements.detector.ports.input - [0,10] ); % the shift is for tolerance
-            obj.sub_elements.lollipop = lollipop.set_layer(L3);
-            obj.sub_elements.window = window.set_layer(L1);
+            obj.elements.detector = detector.set_layer(L2);
+            obj.elements.feedline = feedline.set_layer(L0).place('input',obj.elements.detector.ports.input - [0,10] ); % the shift is for tolerance
+            obj.elements.lollipop = lollipop.set_layer(L3);
+            obj.elements.window = window.set_layer(L1);
             
             % define ports
-            obj.ports.pad = obj.sub_elements.feedline.ports.pad;
+            obj.ports.pad = obj.elements.feedline.ports.pad;
             % define center
             %   find boundnding box
                     [x,y ] = boundingbox(obj.convert2pol);

@@ -14,10 +14,10 @@ classdef rect_frame  < compound_element
 
 
 
-            obj.sub_elements.rect1 = rect(Lx+wx,wy).shift([0,-Ly/2]);
-            obj.sub_elements.rect2 = rect(Lx+wx,wy).shift([0,Ly/2]);
-            obj.sub_elements.rect3 = rect(wx,Ly+wy).shift( [-Lx/2,0]);
-            obj.sub_elements.rect4 = rect(wx,Ly+wy).shift( [Lx/2,0]);
+            obj.elements.rect1 = rect(Lx+wx,wy).shift([0,-Ly/2]);
+            obj.elements.rect2 = rect(Lx+wx,wy).shift([0,Ly/2]);
+            obj.elements.rect3 = rect(wx,Ly+wy).shift( [-Lx/2,0]);
+            obj.elements.rect4 = rect(wx,Ly+wy).shift( [Lx/2,0]);
         end
     end
     

@@ -37,15 +37,15 @@ classdef SNSPD_feedline < compound_element
             lau = launcher(contact_size, line_w,line_w*5/8,lau_adiabatic_l).reflect([0,1]).place('output', cl.ports.output);
             
             % define sub_elements:
-            obj.sub_elements.line = cl;
-            obj.sub_elements.adiabatic = ad_in;
-            obj.sub_elements.launcher = lau;
+            obj.elements.line = cl;
+            obj.elements.adiabatic = ad_in;
+            obj.elements.launcher = lau;
             
             obj.rotate(pi/2);
             
             %define ports
-            obj.ports.input = obj.sub_elements.adiabatic.ports.input;
-            obj.ports.pad = obj.sub_elements.launcher.ports.center;
+            obj.ports.input = obj.elements.adiabatic.ports.input;
+            obj.ports.pad = obj.elements.launcher.ports.center;
          
         end
         

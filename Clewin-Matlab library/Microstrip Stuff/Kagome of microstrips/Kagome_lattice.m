@@ -7,9 +7,9 @@ classdef Kagome_lattice  < compound_element
            %KB = Kagome brick - 4 triangles
             
            %Find triangle side length (of basic unit):
-            TSL=abs( KB.sub_elements.triangleU.sub_elements.bottom.ports.input(1) - KB.sub_elements.triangleU.sub_elements.bottom.ports.output(1)); 
+            TSL=abs( KB.elements.triangleU.elements.bottom.ports.input(1) - KB.elements.triangleU.elements.bottom.ports.output(1)); 
           
-            obj.sub_elements.buildingBlocks  = duplicate(KB,Lattice_Size,[4*TSL*cos(pi/6),2*TSL]);
+            obj.elements.buildingBlocks  = duplicate(KB,Lattice_Size,[4*TSL*cos(pi/6),2*TSL]);
           
         end
     end

@@ -41,8 +41,8 @@ classdef adiabatic_opening < compound_element
                  pol = polygon_element(pol_nodes);
                  
                  % defining sub elements from basic polygon
-                 obj.sub_elements.top = pol.copy().shift([-length/2,0]);
-                 obj.sub_elements.bottom = obj.sub_elements.top.copy().reflect([1,0]);
+                 obj.elements.top = pol.copy().shift([-length/2,0]);
+                 obj.elements.bottom = obj.elements.top.copy().reflect([1,0]);
                  
                  % defining ports
                  obj.ports.input = [-length/2,0];

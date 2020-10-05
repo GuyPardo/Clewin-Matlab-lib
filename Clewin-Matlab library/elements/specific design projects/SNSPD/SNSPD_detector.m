@@ -34,14 +34,14 @@ classdef SNSPD_detector < compound_element
             mea = SNSPD_meander(trace_w, gap_w, segment_l);
             ad = adiabatic_opening(adiabatic_l, trace_w, gap_w, final_w, final_w*5/8).place('input', mea.ports.output);
             
-            obj.sub_elements.meander = mea;
-            obj.sub_elements.adiabatic = ad;
+            obj.elements.meander = mea;
+            obj.elements.adiabatic = ad;
             
             obj.rotate(pi/2);
             
             %ports
-            obj.ports.input  = obj.sub_elements.adiabatic.ports.output;
-            obj.ports.output  = obj.sub_elements.meander.ports.input;
+            obj.ports.input  = obj.elements.adiabatic.ports.output;
+            obj.ports.output  = obj.elements.meander.ports.input;
             
             
         end

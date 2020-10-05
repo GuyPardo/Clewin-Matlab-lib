@@ -13,16 +13,16 @@ classdef Kagome_Piece  < compound_element
             % call parent constructor
            obj@compound_element();
            
-           obj.sub_elements.Resonator   = rect(RL,RW);
-           obj.sub_elements.Coupler_L   = rect(CL,CW);
-           obj.sub_elements.Coupler_R   = obj.sub_elements.Coupler_L.copy();
+           obj.elements.Resonator   = rect(RL,RW);
+           obj.elements.Coupler_L   = rect(CL,CW);
+           obj.elements.Coupler_R   = obj.elements.Coupler_L.copy();
 
-           obj.sub_elements.Coupler_L.place("right", obj.sub_elements.Resonator.ports.left);
-           obj.sub_elements.Coupler_R.place("left", obj.sub_elements.Resonator.ports.right);
+           obj.elements.Coupler_L.place("right", obj.elements.Resonator.ports.left);
+           obj.elements.Coupler_R.place("left", obj.elements.Resonator.ports.right);
            
            %Define ports
-           obj.ports.input  = obj.sub_elements.Coupler_L.ports.left;
-           obj.ports.output = obj.sub_elements.Coupler_R.ports.right;
+           obj.ports.input  = obj.elements.Coupler_L.ports.left;
+           obj.ports.output = obj.elements.Coupler_R.ports.right;
         end
     end
     

@@ -9,16 +9,16 @@ classdef Kagome_cross  < compound_element
            % call parent constructor
            obj@compound_element();
            
-           obj.sub_elements.straight    = KP;
-           obj.sub_elements.bottom      = obj.sub_elements.straight.copy().rotate(-2*pi/3);
-           obj.sub_elements.top         = obj.sub_elements.straight.copy().rotate(2*pi/3);
+           obj.elements.straight    = KP;
+           obj.elements.bottom      = obj.elements.straight.copy().rotate(-2*pi/3);
+           obj.elements.top         = obj.elements.straight.copy().rotate(2*pi/3);
            
-           obj.sub_elements.bottom.place("output", obj.sub_elements.straight.ports.output);
-           obj.sub_elements.top.place("output", obj.sub_elements.straight.ports.output);
+           obj.elements.bottom.place("output", obj.elements.straight.ports.output);
+           obj.elements.top.place("output", obj.elements.straight.ports.output);
           
-           obj.ports.top=obj.sub_elements.top.ports.input;
-           obj.ports.bottom=obj.sub_elements.bottom.ports.input;
-           obj.ports.right=obj.sub_elements.straight.ports.input;
+           obj.ports.top=obj.elements.top.ports.input;
+           obj.ports.bottom=obj.elements.bottom.ports.input;
+           obj.ports.right=obj.elements.straight.ports.input;
            
            
         end

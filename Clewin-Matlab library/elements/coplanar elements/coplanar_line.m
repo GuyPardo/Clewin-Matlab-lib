@@ -20,15 +20,15 @@ classdef coplanar_line < coplanar_element
             obj.ports.input = [-length/2,0];
             obj.ports.output = [length/2,0];
             
-            obj.sub_elements.top_rect = rect(length, gap_w).shift([0,trace_w/2+gap_w/2]);
-            obj.sub_elements.bottom_rect = rect(length, gap_w).shift([0,-trace_w/2-gap_w/2]);
+            obj.elements.top_rect = rect(length, gap_w).shift([0,trace_w/2+gap_w/2]);
+            obj.elements.bottom_rect = rect(length, gap_w).shift([0,-trace_w/2-gap_w/2]);
 
             if boundaries(1)
-                obj.sub_elements.left_cap = rect(gap_w,2*gap_w + trace_w).place('right',obj.ports.input);
+                obj.elements.left_cap = rect(gap_w,2*gap_w + trace_w).place('right',obj.ports.input);
             end
             
             if boundaries(2)
-                obj.sub_elements.right_cap = rect(gap_w,2*gap_w + trace_w).place('left',obj.ports.output);
+                obj.elements.right_cap = rect(gap_w,2*gap_w + trace_w).place('left',obj.ports.output);
             end
 
         end
