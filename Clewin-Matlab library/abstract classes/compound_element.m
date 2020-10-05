@@ -17,7 +17,7 @@ classdef compound_element < element
 % el = compound_element(r1,r2);
 % will work, and then el.elements will have field r1 and r2. 
 % if you want to make composite elements without having to name the sub
-% elements you should use the calss element_array instead.
+% elements you should use the class element_array instead.
 %
 
    properties
@@ -26,6 +26,8 @@ classdef compound_element < element
    
    methods
        function [obj] = compound_element(varargin)
+           % ctor. create an instance of this class. see class doc above
+           % for more details
             for m = 1:nargin
                 obj.elements.(inputname(m)) = varargin{m};
             end

@@ -1,6 +1,9 @@
 classdef element_array < element
     % an elements that is built out of an array of other elements. usful
     % when you can't or don't want to give each sub element a name. 
+    % input argument for constructor:
+    % elements: a cell array of elements (of any type, mixed types are also supported)
+    
    properties
        elements % a cell array of element objects
      end
@@ -12,7 +15,7 @@ classdef element_array < element
        % input arguments:
        % elements: a cell array of elements (of any type, mixed types are also supported)
        
-          obj@element(); % calling the parent ctor
+          obj@element(); % calling the parent ctor 
           obj.elements = elements; % defining the array  
        end
        
