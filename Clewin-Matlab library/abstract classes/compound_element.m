@@ -2,11 +2,34 @@
 classdef compound_element < element
 % an element that is made out of several sub_elements
 % written by Guy 2020_08_16
+%
+% el = compound_element() creates an empty compound_element
+% el = compound_element(element1, element2, element3) with element1,
+% element2, element3 some element objects, creates a compound_element whose
+% sub elements are element1, element2, element3.
+% (works for any number of elements).
+%
+%important: the elemnets must all have names. for example: 
+% el = compound_element(rect(4,3), rect(3,3))
+% will return an error
+% but :
+% r1 = rect(4,3); r2 = rect(3,3);
+% el = compound_element(r1,r2);
+% will work, and then el.elements will have field r1 and r2. 
+% if you want to make composite elements without having to name the sub
+% elements you should use the calss element_array instead.
+%
+
    properties
        elements % a struct which has fields that are elements (they can be any kind of element).
    end
    
    methods
+       function [obj] = compound_element(varargin)
+            for m = 1:nargin
+                obj.elements.(inputname(m)) = varargin{m};
+            end
+       end
        function [obj] = draw(obj)
        % draws the element. 
        % when run from clewin, it uses clewin's polygon() function.
