@@ -1,15 +1,23 @@
 classdef coplanar_meander < compound_element
 %   written by Guy 2020_08
-%   a meandering coplanar line. all dimensions are in microns 
-%   trace_w: width of the trace (metal) 
-%   gap_w: width of the gap (insulator
-%   segment_l : the length of the bulk N-2 segments of the meander. theree
+%   a meandering coplanar line. all dimensions are in microns
+%   
+%   required input arguments for ctor:
+%    N - number of line segments including the two shorter (half length) in
+%       the input and in the output. 
+%   optional parameter : call with name-value pair or with a struct input:
+%   trace_w: width of the trace (metal) . default value: 8
+%   gap_w: width of the gap (insulator . default value: 5
+%   segment_l : the length of the bulk N-2 segments of the meander. there
 %               are another two segments of length segmentl/2 in the input and in the
-%               output
-%   distance : the distance between the segments
-%   N : total number of segments
+%               output. default value: 500
+%   distance : the distance between the segments ( = the diameter of the
+%   arcs). default value: 200
+%
 %   to make a tight-meander , set distance = trace_w + gap_w;
+%
 %  ports:
+%
 %  input
 %  output
 %  center=origin    
@@ -23,22 +31,43 @@ classdef coplanar_meander < compound_element
    
    
    methods
-       function [obj] = coplanar_meander(trace_w, gap_w, segment_l, distance, N, boundaries)
+       function [obj] = coplanar_meander(N, varargin)
+        
+        %% input parsing %%
+        % default parameters:
+        trace_w_def = 8;
+        gap_w_def = 5;
+        boundaries_def = [0,0];
+        segment_l_def = 500;
+        distance_def = 200;
+        
+        % input parser objecrt
+        p = inputParser;
+        addParameter(p, 'trace_w', trace_w_def);
+        addParameter(p, 'gap_w', gap_w_def);
+        addRequired(p,'N');
+        addParameter(p, 'boundaries', boundaries_def);
+        addParameter(p, 'segment_l', segment_l_def);
+        addParameter(p, 'distance', distance_def);
+        parse(p, N, varargin{:}); % parsing
         
         
+        % reading parameters
+        trace_w = p.Results.trace_w;
+        gap_w = p.Results.gap_w;
+        segment_l = p.Results.segment_l;
+        distance = p.Results.distance;
+        boundaries = p.Results.boundaries;
+        
+
            
-           
+        %% constructing     
          R = distance/2;
         if N<3
             segment_l = 2*segment_l + 2*R;
         end
            
-
-        if nargin < 6
-            boundaries = [0,0];
-        end
-        obj.boundaries = boundaries;
-    
+           
         arc_in = coplanar_arc(R,pi/2,trace_w, gap_w,[boundaries(1),0]).place('input', [-(N-1)/2*distance-R,0]);
         arcs_array = {arc_in};
         
@@ -77,10 +106,12 @@ classdef coplanar_meander < compound_element
             obj.ports.center = obj.ports.origin;
             obj.ports.input = obj.elements.arcs.elements{1}.ports.input;
             
+            % define properties
             obj.length = obj.get_length();
             obj.trace_w = trace_w;
             obj.gap_w = gap_w;
             obj.N=N;
+            obj.boundaries = boundaries;
          
        end
        
