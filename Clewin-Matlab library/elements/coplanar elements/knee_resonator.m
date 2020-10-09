@@ -1,4 +1,30 @@
 classdef knee_resonator < compound_element 
+    % written by Guy and Samuel. editted by Guy 09/10/20
+    % a coplanar resonator with length total l, and a knee coupling with
+    % of length coupling_l.
+    %
+    % input arguments for ctor:
+    %
+    % required arguments:
+    % total_l - total length of resonator
+    % coupling_l = length of coupling segment
+    %
+    % optional parameters (call with name-value pair ot input a struct):
+    %   trace_w: width of the trace (metal) . default value: 8
+    %   gap_w: width of the gap (insulator . default value: 5
+    %   segment_l : the length of the bulk N-2 segments of the meander. there
+    %               are another two segments of length segmentl/2 in the input and in the
+    %               output. default value: 500
+    %   distance : the distance between the segments ( = the diameter of the
+    %   arcs). default value: 200
+    %
+    %   to make a tight-meander , set distance = trace_w + gap_w;
+    %
+    % ports:
+    % input
+    % output
+    % center
+
    properties
        length
        trace_w
@@ -68,12 +94,11 @@ classdef knee_resonator < compound_element
            obj.elements.mea.place('input', obj.elements.downLine.ports.output);
            obj.elements.outLine =  coplanar_line(add_l/2,trace_w,gap_w).rotate(-pi/2).place('input', obj.elements.mea.ports.output);
           
+            % defining ports etc
+           
            obj.ports.input = obj.elements.CouplingKnee.ports.input;
            obj.ports.output = obj.elements.outLine.ports.output;
-           
-           
-            % defining ports etc
-
+    
           obj.ports.center = obj.elements.mea.ports.center;
           obj.trace_w = trace_w;
           obj.gap_w = gap_w;
