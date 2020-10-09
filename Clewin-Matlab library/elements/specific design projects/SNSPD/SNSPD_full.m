@@ -13,6 +13,8 @@ classdef SNSPD_full < compound_element
     % origin : the center of the detector
     % pad : the center of contact pad
     % center : geometric cencter of the whole element
+    %
+    %TODO - consider turning this into a script instead of a class 
     
     methods
         function obj = SNSPD_full(detector, feedline, lollipop, window)
