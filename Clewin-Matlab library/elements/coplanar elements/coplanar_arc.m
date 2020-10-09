@@ -1,16 +1,30 @@
 
-classdef coplanar_arc < coplanar_element
+classdef coplanar_arc < compound_element
 % written by Guy 2020_08_16
 % a cicular coplanar-arc defined by a radius R,  an angle and trace_w, and gap_w, starting from the positive x
 % direction and going counterclockwise. 
+% 
 % ports:
 % center = origin - the center of the circle
 % output : the edge at positive x
-% input : the other edge    
+% input : the other edge
+% 
+% input arguments for constructor:
+%
+% R - arc radius
+% angle - opening of the arc in radians
+% trace_w - width of center trace
+% gap_w - width of insulating gap
+% boundaries  (optional) - a 2 vector. [0,0] (default) means open on both
+% sides, [1,0] means closed on one side (the input) etc.
+% res (optional) - resolution (no of points). by default=100 
    properties
       R
       angle
       length
+      trace_w
+      gap_w
+      boundaries
    end
    
    methods
@@ -21,6 +35,7 @@ classdef coplanar_arc < coplanar_element
             if nargin < 6
                 res = 100;
             end
+
             
             
             obj.boundaries = boundaries;

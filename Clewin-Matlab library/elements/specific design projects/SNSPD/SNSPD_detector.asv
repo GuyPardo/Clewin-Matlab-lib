@@ -22,7 +22,7 @@ classdef SNSPD_detector < compound_element
     
     
     methods
-        function obj = SNSPD_detector(varargin)
+        function obj = SNSPD_detector(trace_w, gap_w, segment_l,adiabatic_l, final_w)
             %DETECTOR Construct an instance of this class.
             % input parsing
                 % default parameters
@@ -33,13 +33,12 @@ classdef SNSPD_detector < compound_element
             addOptional(p, 'gap_w', gap_w_def);
             addParameter(p, 'segment_l', segment_l_def);
             addParameter(p, 'adiabatic_l', adiabatic_l_def);
-            addParameter(p, 'final_w', final_w_def);
-            parse(p, varargin{:})
+            addParameter(p, 'final_w', adiabatic_l_def);
             
-            
-            % read inputs
-      trace_w = p.Results.trace_w; gap_w =p.Results.gap_w; segment_l=p.Results.segment_l; adiabatic_l=p.Results.adiabatic_l; final_w = p.Results.final_w;
-
+            % default configurations:
+            if nargin<1
+               trace_w = .200; gap_w = .200; segment_l=10; adiabatic_l=18; final_w = 18;
+            end
             
             
             mea = SNSPD_meander(trace_w, gap_w, segment_l);

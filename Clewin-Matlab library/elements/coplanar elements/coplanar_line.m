@@ -1,7 +1,10 @@
 % written by Guy 2020_08_16
-classdef coplanar_line < coplanar_element
+classdef coplanar_line < compound_element
     properties
         length
+        trace_w
+        gap_w
+        boundaries
     end
     
 

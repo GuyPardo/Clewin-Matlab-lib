@@ -1,5 +1,12 @@
 classdef adiabatic_opening < compound_element
     %adiabatic_opening coplanar adiabatic opening
+    %       input arguments for ctor::
+            %   length
+            %   trace_w_in
+            %   gap_w_in
+            %   trace_w_out
+            %   gap_w_out (optional) - if not supplied, keep the same ratio
+            %   trace/gap
     %   ports:
     %   input
     %   output
@@ -15,13 +22,6 @@ classdef adiabatic_opening < compound_element
     methods
         function obj = adiabatic_opening(length,trace_w_in, gap_w_in, trace_w_out, gap_w_out)
             %adiabatic_opening Construct an instance of this class
-            %   input arguments:
-            %   length
-            %   trace_w_in
-            %   gap_w_in
-            %   trace_w_out
-            %   gap_w_out (optional) - if not supplied, keep the same ratio
-            %   trace/gap
             if nargin<5
                 gap_w_out = trace_w_out*(gap_w_in/trace_w_in);
             end
