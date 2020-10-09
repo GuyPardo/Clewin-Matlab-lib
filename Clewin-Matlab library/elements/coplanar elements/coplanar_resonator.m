@@ -12,7 +12,6 @@ classdef coplanar_resonator < compound_element
 %
 % optional parameters ( use with name-value pair syntax, or input a
 % struct):
-%
 %   trace_w: width of the trace (metal) . default value: 8
 %   gap_w: width of the gap (insulator . default value: 5
 %   segment_l : the length of the bulk N-2 segments of the meander. there
