@@ -33,8 +33,8 @@ classdef SNSPD_feedline < compound_element
             ad_in.place('output',cl.ports.input);
             
             % launcher
-            contact_size = 300; lau_adiabatic_l = 300; 
-            lau = launcher(contact_size, line_w,line_w*5/8,lau_adiabatic_l).reflect([0,1]).place('output', cl.ports.output);
+            lau_params.line_w = line_w; lau_params.line_gap = line_w*5/8;
+            lau = launcher(lau_params).reflect([0,1]).place('output', cl.ports.output);
             
             % define sub_elements:
             obj.elements.line = cl;
