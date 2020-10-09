@@ -4,32 +4,50 @@ classdef SNSPD_lollipop < compound_element
     % then a long coplanar adiabatic opening, and a "stop" (a small
     % rectangle) at the end for easy breaking.
     %
-    % ctop input arguments:
-    % (running lollipop() gives the default parameters)
-%                 diameter = 2497  
-%                 cut_w = 200; 
-%                 neck_w = 400;
-%                 neck_l = 500;
-%                 adiabatic_l = 3050;
-%                 final_w = 900;
-%                 stop_l = final_w/2; 
+    % ctor input arguments:
+    % all optional parameters (use name-value paor syntax or input a struct)
+%                 diameter - diameter of device  (default value: 2497)
+%                 cut_w - width of cut around the lollipop shape (defualt: 200) 
+%                 neck_w - (default value: 400)
+%                 neck_l -  (default: 500);
+%                 adiabatic_l - (default :3050);
+%                 final_w - (default 900);
+%                 stop_l -  (default=450); 
+%
+% ports: origin - center of the circle
     
-    
-    properties
-        Property1
-    end
-    
+   
     methods
-        function obj = SNSPD_lollipop(diameter, adiabatic_l,  neck_l, final_w, neck_w, cut_w, stop_l)  
-            if nargin<1
-                diameter = 2497; %diameter of desired lolipop
-                cut_w = 200; 
-                neck_w = 400;
-                neck_l = 500;
-                adiabatic_l = 3050;
-                final_w = 900;
-                stop_l = final_w/2; 
-            end
+        function obj = SNSPD_lollipop(varargin)  
+            % input parsing
+                % default values:
+                diameter_def = 2497; %diameter of desired lolipop
+                cut_w_def = 200; 
+                neck_w_def = 400;
+                neck_l_def = 500;
+                adiabatic_l_def = 3050;
+                final_w_def = 900;
+                stop_l_def = final_w_def/2;
+            
+            p = inputParser;
+            addParameter(p, 'diameter', diameter_def );
+            addParameter(p, 'cut_w', cut_w_def );
+            addParameter(p, 'neck_w', neck_w_def );
+            addParameter(p, 'neck_l', neck_l_def );
+            addParameter(p, 'adiabatic_l', adiabatic_l_def );
+            addParameter(p, 'final_w', final_w_def );
+            addParameter(p, 'stop_l', stop_l_def );
+            parse(p, varargin{:})
+
+            %read values    
+            diameter = p.Results.diameter;
+            cut_w = p.Results.cut_w; 
+            neck_w = p.Results.neck_w;
+            neck_l = p.Results.neck_l;
+            adiabatic_l = p.Results.adiabatic_l;
+            final_w = p.Results.final_w;
+            stop_l = p.Results.stop_l; 
+
             
             
             % circular part
