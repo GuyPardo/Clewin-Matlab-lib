@@ -1,8 +1,19 @@
 classdef SNSPD_meander < compound_element
     % written by Guy 2020_09_30
-    % a tight square meander  
-  
-    
+    % a tight square (approximately) meander 
+    %
+    % input arguments for ctor:
+    %
+    % trace_w - width of metal
+    % gap_w - width of gaps 
+    % segment_l  - length of the line segments that make the meander
+    % boundaries (optional) - a 2 vector indicating the coundariy
+    % conditions. e.g [1,0] for close-open. default value - [0,0]
+    %
+    % ports:
+    % input
+    % output
+    % origin (center of meander)
     properties
         trace_w
         gap_w
@@ -12,7 +23,6 @@ classdef SNSPD_meander < compound_element
     
     methods
         function obj = SNSPD_meander(trace_w, gap_w, segment_l, boundaries )
-
             
             if nargin < 4
                 boundaries = [0,0];

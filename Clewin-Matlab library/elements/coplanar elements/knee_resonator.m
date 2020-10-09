@@ -6,8 +6,8 @@ classdef knee_resonator < compound_element
     % input arguments for ctor:
     %
     % required arguments:
-    % total_l - total length of resonator
-    % coupling_l = length of coupling segment
+    %   total_l - total length of resonator
+    %   coupling_l = length of coupling segment
     %
     % optional parameters (call with name-value pair ot input a struct):
     %   trace_w: width of the trace (metal) . default value: 8
