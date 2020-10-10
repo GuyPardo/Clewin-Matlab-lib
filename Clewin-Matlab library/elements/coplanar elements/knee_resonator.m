@@ -86,6 +86,10 @@ classdef knee_resonator < compound_element
                     end          
            end
            
+           if NO_hor ==0 
+              error('computed number of segments is zero. total_l is too small.') 
+           end
+           
            obj.elements.mea = coplanar_meander( NO_hor, meander_params).rotate(-pi/2);
            
            add_l = target_l - obj.elements.mea.get_length();
