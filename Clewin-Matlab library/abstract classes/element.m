@@ -255,7 +255,7 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
 
                     arr{i} =  obj.copy().place('origin',[x,y] + origin);
                     if rotate
-                        arr{i}.rotate(angle*(i-1))
+                        arr{i}.rotate(angle*(i-1));
                     end
             end
             output_elem = element_array(arr);
