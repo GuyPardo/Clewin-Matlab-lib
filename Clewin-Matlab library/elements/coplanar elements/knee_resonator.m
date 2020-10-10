@@ -1,6 +1,6 @@
 classdef knee_resonator < compound_element 
     % written by Guy and Samuel. editted by Guy 09/10/20
-    % a coplanar resonator with length total l, and a knee coupling with
+    % a coplanar resonator with length total_l, and a knee-type coupling
     % of length coupling_l.
     %
     % input arguments for ctor:
@@ -21,9 +21,9 @@ classdef knee_resonator < compound_element
     %   to make a tight-meander , set distance = trace_w + gap_w;
     %
     % ports:
-    % input
-    % output
-    % center
+    % input - the end of the coupling knee
+    % output - the other end of the resonator
+    % center - the center of the meander.
 
    properties
        length

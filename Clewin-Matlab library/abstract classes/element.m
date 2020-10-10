@@ -58,10 +58,10 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
         % apply a general linear transformation matrix to the element.
         % arguments:
         %               
-        % mat : the transfomation matrix origin (optional) : the origin
-        % with respect to which the transformation is applied (e.g.
-        % rotation around some point). by default it is the origin of the
-        % element.
+        % mat : the transfomation matrix
+        % origin (optional) : the origin with respect to which the
+        % transformation is applied (e.g. rotation around some point). by
+        % default it is the origin of the element.
         % 
         % this function is also implemented in subclasses (e.g
         % polygon_element). apply_tranfromation@element moves the ports,
@@ -207,7 +207,6 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             % input_elem.
             %  
             % input arguments:
-            % input_elem : any element
             % size : the dimensions of the array given as a 2 vector [rows, collums]
             % spacing : the spcacing between rows and collums, given as a 2 vector.
 
@@ -230,7 +229,6 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             %   input_elem
             %
             %   input arguments:
-            %   input_elem : any element object
             %   angle : the angle between successive copies 
             %   N : number of copies
             %   origin  : the origin for the circle, given as a 2 vector
