@@ -197,7 +197,71 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
            pol_out = xor(pol1, pol2); % a matlab builtin acting on mtalab polyshape objects
            obj_out = pol2elem(pol_out);          
        end
-        
+       
+       
+       function [output_elem] = duplicate(obj,size, spacing)
+            % written by Guy 2020_08_28 as an external function
+            % made it a  method on 2020_10_10
+            % 
+            % returns an element_array object which is a 2D array of copies of
+            % input_elem.
+            %  
+            % input arguments:
+            % input_elem : any element
+            % size : the dimensions of the array given as a 2 vector [rows, collums]
+            % spacing : the spcacing between rows and collums, given as a 2 vector.
+
+            arr = cell(size(1), size(2));
+            for i = 1:size(1)
+                for j = 1:size(2)
+                    y = -spacing(1)*(size(1)-1)/2+spacing(1)*(i-1);
+                    x = -spacing(2)*(size(2)-1)/2+spacing(2)*(j-1);
+                    arr{i,j} =  obj.copy().shift([x,y]);
+
+                end
+            end
+            output_elem = element_array(arr);
+        end
+
+        function [output_elem] = duplicate_circ(obj,angle, N,origin, rotate)
+            %written by Guy 2020_08_28 as an external function
+            % made a method on 2020_10_10
+            %   returns an element_array which is a circular  array of copies of
+            %   input_elem
+            %
+            %   input arguments:
+            %   input_elem : any element object
+            %   angle : the angle between successive copies 
+            %   N : number of copies
+            %   origin  : the origin for the circle, given as a 2 vector
+            %   rotate(optional): a boolian. if true, the copies are also rotated about
+            %   their respective origins. by default it is true.
+            % TODO use inputParser.  rotate should be a name-value pair.
+            % origin maybe an optional argument.
+            if nargin < 4
+                origin = [0,0];
+            end
+            if nargin<5
+                rotate = true;
+            end
+
+            pos = obj.ports.origin - origin;
+            R = sqrt(pos(1)^2 + pos(2)^2);
+
+            angle_in = atan(pos(2)/pos(1));
+            arr = cell(1,N);
+            for i = 1:N
+                    angle_temp = angle_in + angle*(i-1);
+                    x = R*cos(angle_temp);
+                    y = R*sin(angle_temp);
+
+                    arr{i} =  obj.copy().place('origin',[x,y] + origin);
+                    if rotate
+                        arr{i}.rotate(angle*(i-1))
+                    end
+            end
+            output_elem = element_array(arr);
+        end
 
 
     end
