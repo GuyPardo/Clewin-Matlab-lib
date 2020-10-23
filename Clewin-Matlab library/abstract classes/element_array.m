@@ -75,7 +75,7 @@ classdef element_array < element
            % convert each array element:
            pols = cellfun(@(x) x.convert2pol, obj.elements);
            % define a vector of polyshape objects
-           for k=1:length(pols)
+            for k=1:length(pols)
                polyVec(k) = pols(k);
            end
            
