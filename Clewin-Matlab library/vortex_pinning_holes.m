@@ -53,9 +53,7 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
        exc = {exc}; 
     end
     
-    if isempty(exc)
-        
-    end
+
     scale_mat = (1+tol)*eye(2);
     
     exc_elem = element_array(exc).apply_transformation(scale_mat);
