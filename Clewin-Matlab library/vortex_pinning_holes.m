@@ -11,7 +11,7 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     % with holes
     
     % optional argument: exclusion_elements: an element or a cell array of
-    % elements that we don't want the hole to overlap for example:
+    % elements that we don't want the holes to overlap for example:
     % vortex_pinning_holes(500,500,circle(100)) creates holes inside a
     % 500*500 rectangle,outside a radius of 100 from the origin
     % 
