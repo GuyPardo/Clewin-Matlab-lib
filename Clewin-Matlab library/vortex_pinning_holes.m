@@ -20,11 +20,11 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     %
     %
     % optional parameters (call with name-value pair or with a struct
-    % input):
-    % hole_diameter : diameter of the holes. by default 3
+    % input): hole_diameter : diameter of the holes. by default 3
     % hole_dist: the distance between adjacent holes. by default 30
-    % tolerance : a number from 0 to 1. indicates how much tolerance should
-    % be taken to avoid the excluded elements (relative to the size of each element). by defualt: 0.1
+    % tolerance : a positive number . indicates how much tolerance should
+    % be taken to avoid the excluded elements, relative to the size of each
+    % element. by defualt: 0.1 (10%)
     
     
     
