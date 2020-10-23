@@ -58,6 +58,8 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     exc_elem = element_array(exc).apply_transformation(scale_mat);
     % convert to polygon
     exc_pol = exc_elem.convert2pol();
+    % find bounding box
+    [x_lim, y_lim] = boundingbox(exc_pol);
     
     % define a single hole
     hole = circle(hole_r);
@@ -71,10 +73,11 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     counter = 0;
     for i = 1:y_num
         for j = 1:x_num
-            if ~overlaps(hole_arr_temp.elements{i,j}.convert2pol,exc_pol)
-               hole_arr{counter+1} = hole_arr_temp.elements{i,j};
-               counter =  counter+1;
-            end
+            if and(hole_arr_temp.elements{i,j}.ports.origin
+                if ~overlaps(hole_arr_temp.elements{i,j}.convert2pol,exc_pol)
+                   hole_arr{counter+1} = hole_arr_temp.elements{i,j};
+                   counter =  counter+1;
+                end
         end
     end
     
