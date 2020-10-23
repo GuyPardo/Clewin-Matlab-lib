@@ -269,6 +269,16 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             % bounnding box
            [x_limit, y_limit] = boundingbox(obj.convert2pol()); 
         end
+        
+        function TF =  overlap(elem1, elem2)
+            % written by guy 2020_10_23
+            % this is an envelope for matlab's builtin overlaps.
+            % returns true if elem1 and elem2 overlap, and false if they
+            % don't.
+            %TODO - generalize for cell arrays of elements
+            
+            TF = overlaps(elem1.convert2pol(), elem2.convert2pol());
+        end
 
 
     end
