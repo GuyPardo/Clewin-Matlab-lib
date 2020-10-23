@@ -53,17 +53,21 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
        exc = {exc}; 
     end
     
-
+    % scaling the excluded elemnt according to the tolerance
     scale_mat = (1+tol)*eye(2);
-    
     exc_elem = element_array(exc).apply_transformation(scale_mat);
+    % convert to polygon
     exc_pol = exc_elem.convert2pol();
     
+    % define a single hole
     hole = circle(hole_r);
     
+    % define array of holes
     x_num = floor(wx/hole_d);
     y_num = floor(wy/hole_d);
     hole_arr_temp = hole.duplicate([y_num, x_num], [hole_d, hole_d]);
+    
+    % loop on array and take only holes that do not overlay with exc_pol
     counter = 0;
     for i = 1:y_num
         for j = 1:x_num
