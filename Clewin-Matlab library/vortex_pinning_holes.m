@@ -67,17 +67,24 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     % define array of holes
     x_num = floor(wx/hole_d);
     y_num = floor(wy/hole_d);
-    hole_arr_temp = hole.duplicate([y_num, x_num], [hole_d, hole_d]);
+    hole_arr_temp = hole.duplicate([y_num, x_num], [hole_d, hole_d]).elements;
     
     % loop on array and take only holes that do not overlay with exc_pol
     counter = 0;
     for i = 1:y_num
         for j = 1:x_num
-            if and(hole_arr_temp.elements{i,j}.ports.origin
-                if ~overlaps(hole_arr_temp.elements{i,j}.convert2pol,exc_pol)
-                   hole_arr{counter+1} = hole_arr_temp.elements{i,j};
+                hol = hole_arr_temp{i,j};
+            in_bounding_box = hol.ports.bottom>y_lim(1) & hol.ports.top<y_lim(2) & hol.ports.left>x_lim(1) & hol.ports.right<x_lim(2) ;
+            if in_bounding_box
+                if ~overlaps(hol.convert2pol,exc_pol)
+                   hole_arr{counter+1} = hol;
                    counter =  counter+1;
                 end
+            else
+                   hole_arr{counter+1} = hol;
+                   counter =  counter+1;
+            end
+                
         end
     end
     

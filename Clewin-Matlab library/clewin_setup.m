@@ -12,4 +12,4 @@ addpath(genpath(lib_path));
 rmpath(genpath(excluded_path));
  savepath
 % 
-clearvars
+
