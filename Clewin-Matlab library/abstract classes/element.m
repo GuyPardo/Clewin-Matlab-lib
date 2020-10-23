@@ -260,6 +260,15 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             end
             output_elem = element_array(arr);
         end
+        
+        function [x_limit,y_limit] =  bounding_box(obj)
+            % written by guy 2020_10_23
+            % this is an envelope for matlab's builtin boundingbox
+            % the outputs x_limit and y_limit are 2-vectors containig the
+            % lower and upper bound in each coordinate for the elements
+            % bounnding box
+           [x_limit, y_limit] = boundingbox(obj.convert2pol()); 
+        end
 
 
     end
