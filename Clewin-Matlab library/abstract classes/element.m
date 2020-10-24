@@ -356,6 +356,8 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             
             TF = overlaps(elem1.convert2pol(), elem2.convert2pol());
         end
+        
+
 
 
     end

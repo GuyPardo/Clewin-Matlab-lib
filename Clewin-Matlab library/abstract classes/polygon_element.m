@@ -96,6 +96,14 @@ classdef polygon_element < element
 
         obj_out = polygon_element([nodes1; nodes2]);
         end
+        
+        function pol_elem = bounding_pol(obj, tol)
+            if nargin<2
+               tol=0;
+            end
+            [x,y] =  bounding_box(obj, tol);
+            pol_elem = polygon_element([x(1) y(1); x(1) y(2); x(2) y(2); x(2) y(1)]);
+        end
 
 
    end

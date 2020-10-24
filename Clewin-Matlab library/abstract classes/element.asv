@@ -295,35 +295,56 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             angle_in = atan(pos(2)/pos(1));
             
             if return_element_array
+                arr = cell(1,N);
+                for i = 1:N
+                        angle_temp = angle_in + angle*(i-1);
+                        x = R*cos(angle_temp);
+                        y = R*sin(angle_temp);
+                        
+                        arr{i} = obj.copy().place('origin', [x,y] + origin);
+                        if rotate
+                            arr{i}.rotate(angle*(i-1));
+                        end
+                end
+                output_elem = element_array(arr);
                 
             else
                 counter = 0;
-            coordinates = nan(N,2);
-            rotation_angles = zeros(1,N);
-            for i = 1:N
-                    angle_temp = angle_in + angle*(i-1);
-                    x = R*cos(angle_temp);
-                    y = R*sin(angle_temp);
+                coordinates = nan(N,2);
+                rotation_angles = zeros(1,N);
+                for i = 1:N
+                        angle_temp = angle_in + angle*(i-1);
+                        x = R*cos(angle_temp);
+                        y = R*sin(angle_temp);
 
-                    coordinates(counter+1,:) =  [x,y];
-                    counter = counter +1;
-                    if rotate
-                        rotation_angles(i)=(angle*(i-1));
-                    end
-            end
-            output_elem = element_grid(obj, coordinates, rotation_angles);
+                        coordinates(counter+1,:) =  [x,y];
+                        counter = counter +1;
+                        if rotate
+                            rotation_angles(i)=(angle*(i-1));
+                        end
+                end
+                output_elem = element_grid(obj, coordinates, rotation_angles);
             end
             
             
         end
         
-        function [x_limit,y_limit] =  bounding_box(obj)
+        function [x_limit,y_limit] =  bounding_box(obj, tol)
             % written by guy 2020_10_23
             % this is an envelope for matlab's builtin boundingbox
             % the outputs x_limit and y_limit are 2-vectors containig the
             % lower and upper bound in each coordinate for the elements
             % bounnding box
-           [x_limit, y_limit] = boundingbox(obj.convert2pol()); 
+            % tol is an optional argument (by default 0) specifying a
+            % tolerance (in um) (just increasing the resulting boundaries by tol)
+           if nargin<2
+               tol=0;
+           end
+           tol_vec = [-tol, tol];
+            [x_limit, y_limit] = boundingbox(obj.convert2pol());
+            x_limit = x_limit + tol_vec;
+            y_limit = y_limit + tol_vec;
+           
         end
         
         function TF =  overlap(elem1, elem2)
@@ -335,6 +356,8 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             
             TF = overlaps(elem1.convert2pol(), elem2.convert2pol());
         end
+        
+        function pol_elem = bounding_pol(obj)
 
 
     end
