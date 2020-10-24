@@ -8,21 +8,28 @@ classdef element_grid < element
    properties
        source_element % an element object
        coordinates % a N*2 matrix specifying  the coordinates of the different copies relative to obj.ports.origin
+       rotation_angles % an N vector of angles to rotate the different copies, by default all zero
    end
    
    methods
-       function obj = element_grid(source_element, coordinates)
+       function obj = element_grid(source_element, coordinates, rotation_angles)
           % creates an instance of element_grid
            
+          if nargin<3
+              rotation_angles = zeros(1, length(coordinates));
+          end
+          
           % define properties
           obj.source_element = source_element;
           obj.coordinates = coordinates;   
+          obj.rotation_angles = rotation_angles;
        end
        function obj = draw(obj)
           % loop on the coordinates:
            for i = 1:length(obj.coordinates)
               % shift source_element and draw:
-               obj.source_element.place('origin', obj.coordinates(i,:)).draw(); 
+               obj.source_element.rotate(obj.rotation_angles(i)).place('origin', obj.coordinates(i,:)).draw();
+               obj.source_element.rotate(-obj.rotation_angles(i)); % rotate back
            end
        end
         function [pol] = convert2pol(obj)

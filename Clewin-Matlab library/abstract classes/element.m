@@ -250,18 +250,21 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             R = sqrt(pos(1)^2 + pos(2)^2);
 
             angle_in = atan(pos(2)/pos(1));
-            arr = cell(1,N);
+            counter = 0;
+            coordinates = nan(N,2);
+            rotation_angles = zeros(1,N);
             for i = 1:N
                     angle_temp = angle_in + angle*(i-1);
                     x = R*cos(angle_temp);
                     y = R*sin(angle_temp);
 
-                    arr{i} =  obj.copy().place('origin',[x,y] + origin);
+                    coordinates(counter+1,:) =  [x,y];
+                    counter = counter +1;
                     if rotate
-                        arr{i}.rotate(angle*(i-1));
+                        rotation_angles(i)=(angle*(i-1));
                     end
             end
-            output_elem = element_array(arr);
+            output_elem = element_grid(obj, coordinates, rotation_angles);
         end
         
         function [x_limit,y_limit] =  bounding_box(obj)
