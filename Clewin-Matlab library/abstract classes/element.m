@@ -227,8 +227,10 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
 
         function [output_elem] = duplicate_circ(obj,angle, N,origin, rotate)
             %written by Guy 2020_08_28 as an external function
-            % made a method on 2020_10_10
-            %   returns an element_array which is a circular  array of copies of
+            % made into a method on 2020_10_10
+            % editted on 2020_10_24 to use element_grid for resource
+            % effeciency
+            %   returns an element_grid object which is a circular  array of copies of
             %   input_elem
             %
             %   input arguments:
