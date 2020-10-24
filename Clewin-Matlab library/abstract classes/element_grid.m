@@ -7,7 +7,7 @@ classdef element_grid < element
 
    properties
        source_element % an element object
-       coordinates % a 2*N matrix specifying  the coordinates of the different copies relative to obj.ports.origin
+       coordinates % a N*2 matrix specifying  the coordinates of the different copies relative to obj.ports.origin
    end
    
    methods
