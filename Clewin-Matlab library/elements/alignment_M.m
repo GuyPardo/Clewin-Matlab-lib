@@ -35,10 +35,10 @@ classdef alignment_M  < compound_element
            obj.elements.rigdown = obj.elements.topRig.copy().rotate(-pi/2);
            
            RectArr=duplicate(rect(10,10),[4 4],[20,20]);
-           obj.elements.RectArr_LeftUP   =RectArr.shift([-100,100]);
-           obj.elements.RectArr_Leftdown =RectArr.copy.shift([0,-200]);
-           obj.elements.RectArr_rightdow =RectArr.copy.shift([200,0]);
-           obj.elements.RectArr_rightUp  =RectArr.copy.shift([200,-200]);
+           obj.elements.RectArr_LeftUP   =RectArr.copy().shift([-100,100]);
+           obj.elements.RectArr_Leftdown =RectArr.copy().shift([-100,-100]);
+           obj.elements.RectArr_rightdow =RectArr.copy().shift([100,-100]);
+           obj.elements.RectArr_rightUp  =RectArr.copy().shift([100,100]);
            
            % GUY - add text label:
            obj.elements.text = text_element(text_str, R*1.2).shift([-50, 150]);

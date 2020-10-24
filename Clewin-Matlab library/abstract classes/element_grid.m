@@ -25,10 +25,12 @@ classdef element_grid < element
           obj.rotation_angles = rotation_angles;
        end
        function obj = draw(obj)
+           origin = obj.source_element.ports.origin;
           % loop on the coordinates:
            for i = 1:length(obj.coordinates)
               % shift source_element and draw:
-               obj.source_element.rotate(obj.rotation_angles(i)).place('origin', obj.coordinates(i,:)).draw();
+               obj.source_element.rotate(obj.rotation_angles(i)).place('origin', origin + obj.coordinates(i,:)).draw();
+%                obj.source_element.shift(-obj.coordinates(i,:)) % shift back
                obj.source_element.rotate(-obj.rotation_angles(i)); % rotate back
            end
        end
@@ -51,7 +53,63 @@ classdef element_grid < element
             obj.layer = layer_obj;
         end
         
+       function [obj] = shift(obj, shift_vec)
+       % shifts the element rigidly
+       %
+       %
+       % inputs:
+       %
+       % shift_vec: a 2 (row) vector corresponding to the point where we
+       % want the origin of the element to move.  
+       
+%       shift the source element:
+        obj.source_element.shift(shift_vec)
+     % call parent version of shift() in order to update the ports (the ports of
+     % obj)
+            shift@element(obj, shift_vec);            
+       end
+       
+       function [obj] = apply_transformation(obj, mat, origin)
+       % apply a general linear transformation matrix to the element.
+       % 
+       % arguments:
+       %               
+       % mat : the transfomation matrix
+       % origin (optional) : the origin with respect to which the
+       % transformation is applied (e.g. rotation around some point). if
+       % not supplied by user, each element in the array is transformed
+       % with respect to it's own origin.
+       % TODO - maybe this is confusing. maybe the default should still be
+       % the big origin and add an optional feature to choose.
+           
+           % if origin is not supplied by user, perform the transformation
+           % on the source element:
+           if nargin<3
+                obj.source_element.apply_transformation(mat);
+           else
+               % apply the transformation on the coordinates
+                obj.shift(-origin);
+                obj.coordinates = transpose(mat*transpose(obj.coordinates));
+                obj.shift(+origin);
+                % call parent version in order to update the ports
+                apply_transformation@element(obj, mat,origin);  
+            
+           end                   
+       end
+        
      
+       
+   end
+   
+     methods (Access = protected)
+      function [obj_copy] = copyElement(obj)
+      % an overload for matlab's copyElement.
+      % matlab's copyElement is a protected method of copiable objects that
+      % is used inside the public copy() method
+      
+           obj_copy = copyElement@element(obj);           
+           obj_copy.source_element = obj.source_element.copy();
+        end
        
    end
 end

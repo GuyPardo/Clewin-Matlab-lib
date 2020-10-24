@@ -71,7 +71,7 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     
     % loop on array and take only holes that do not overlay with exc_pol
     counter = 0;
-    for i = 1:y_num
+    for i = 1:hole_arr_temp
         for j = 1:x_num
                 hol = hole_arr_temp{i,j};
             in_bounding_box = hol.ports.bottom>y_lim(1) & hol.ports.top<y_lim(2) & hol.ports.left>x_lim(1) & hol.ports.right<x_lim(2) ;
