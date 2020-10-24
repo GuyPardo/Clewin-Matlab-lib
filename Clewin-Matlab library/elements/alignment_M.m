@@ -7,8 +7,7 @@ classdef alignment_M  < compound_element
         function [obj] = alignment_M(R, text_str)
             
             if nargin<1
-                text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
-                R=30;
+                 R=30;
                 text_str = ' '; % GUY - an ugly but easy way to write nothing if no txt supplied
                 
             end
@@ -34,7 +33,7 @@ classdef alignment_M  < compound_element
            obj.elements.rigUp = obj.elements.topLef.copy().rotate(-pi/2);
            obj.elements.rigdown = obj.elements.topRig.copy().rotate(-pi/2);
            
-           RectArr=duplicate(rect(10,10),[4 4],[20,20]);
+           RectArr=duplicate(rect(10,10),[4 4],[20,20]); 
            obj.elements.RectArr_LeftUP   =RectArr.copy().shift([-100,100]);
            obj.elements.RectArr_Leftdown =RectArr.copy().shift([-100,-100]);
            obj.elements.RectArr_rightdow =RectArr.copy().shift([100,-100]);

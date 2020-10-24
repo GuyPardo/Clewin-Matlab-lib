@@ -96,6 +96,21 @@ classdef polygon_element < element
 
         obj_out = polygon_element([nodes1; nodes2]);
         end
+        
+        function pol = bounding_pol(obj, tol)
+            % written by guy 2020_10_24 
+            % returns the bounding box of the polygon in the format of a
+            % matlab polyshape. the idea is to use this for example in
+            % counpound elements to get a bounding polygon which is made
+            % out of a union of the bounding boxes of the sub elements. see
+            % compound_element@bounding_pol 
+            % tol is an optional variable determinig tolerance in um.
+            if nargin<2
+               tol=0;
+            end
+            [x,y] =  bounding_box(obj, tol);
+            pol= polyshape([x(1), x(1), x(2),x(2)],[ y(1), y(2), y(2), y(1)]);
+        end
 
 
    end

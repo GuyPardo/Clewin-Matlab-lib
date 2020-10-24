@@ -73,6 +73,26 @@ classdef text_element < element
         function [] = convert2pol(obj)
             warning('convert2pol is not supported for text_elements.')
         end
+        
+        function [x_limit, y_limit]  = bounding_box(obj, tol)
+            if nargin<2
+                tol=0;
+            end
+            tol_vec = [-tol, tol];
+           x_limit = [obj.ports.origin(1) - max(obj.get_length, obj.size)/2, obj.ports.origin(1) + max(obj.get_length, obj.size)/2 ]; 
+           y_limit = [obj.ports.origin(2) - max(obj.get_length, obj.size)/2, obj.ports.origin(2) + max(obj.get_length, obj.size)/2 ];
+           
+           x_limit = x_limit + tol_vec;
+           y_limit = y_limit + tol_vec;
+        end
+        
+        function [pol] = bounding_pol(obj, tol)
+            if nargin<2
+               tol=0;
+            end
+            [x,y] =  bounding_box(obj, tol);
+            pol= polyshape([x(1), x(1), x(2),x(2)],[ y(1), y(2), y(2), y(1)]);
+        end
    end
        
 

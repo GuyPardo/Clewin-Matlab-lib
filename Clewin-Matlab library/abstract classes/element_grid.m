@@ -96,6 +96,17 @@ classdef element_grid < element
             
            end                   
        end
+       
+       function pol = bounding_pol(obj, tol)
+            % returns a matlab polyshape object which is the union of
+            % bounding boxes of the sub elements.
+            % tol is an optional parameter specifying tolerance in um
+            if nargin<2
+               tol=0;
+            end
+            source_box =  pol2elem(obj.source_element.bounding_pol(tol));
+            pol = element_grid(source_box, obj.coordinates).convert2pol();
+        end
         
      
        
