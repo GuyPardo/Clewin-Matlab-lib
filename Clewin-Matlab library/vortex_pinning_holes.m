@@ -32,7 +32,7 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     % default values
     hole_diameter_def = 3;
     hole_dist_def = 30;
-    tol_def = 0.1;
+    tol_def = 0;
     
     p = inputParser;
     addRequired(p, 'wx');
@@ -53,11 +53,10 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
        exc = {exc}; 
     end
     
-    % scaling the excluded elemnt according to the tolerance
-    scale_mat = (1+tol)*eye(2);
-    exc_elem = element_array(exc).apply_transformation(scale_mat);
-    % convert to polygon
-    exc_pol = exc_elem.convert2pol();
+    exc_elem = element_array(exc);
+    exc_pol = exc_elem.bounding_pol(tol);
+%     exc_pol.plot;  axis equal; shg
+
     % find bounding box
     [x_lim, y_lim] = boundingbox(exc_pol);
     
@@ -67,29 +66,27 @@ function elem_out = vortex_pinning_holes(wx, wy,  varargin)
     % define array of holes
     x_num = floor(wx/hole_d);
     y_num = floor(wy/hole_d);
-    hole_arr_temp = hole.duplicate([y_num, x_num], [hole_d, hole_d]).elements;
+    hole_arr_temp = hole.duplicate([y_num, x_num], [hole_d, hole_d]);
     
     % loop on array and take only holes that do not overlay with exc_pol
-    counter = 0;
-    for i = 1:hole_arr_temp
-        for j = 1:x_num
-                hol = hole_arr_temp{i,j};
-            in_bounding_box = hol.ports.bottom>y_lim(1) & hol.ports.top<y_lim(2) & hol.ports.left>x_lim(1) & hol.ports.right<x_lim(2) ;
+    coordinates = [];
+    for i = 1:length(hole_arr_temp.coordinates)
+
+            hol = hole.copy().place('origin', hole_arr_temp.coordinates(i,:));
+            in_bounding_box = hol.ports.bottom(2)>y_lim(1) & hol.ports.top(2)<y_lim(2) & hol.ports.left(1)>x_lim(1) & hol.ports.right(1)<x_lim(2) ;
             if in_bounding_box
                 if ~overlaps(hol.convert2pol,exc_pol)
-                   hole_arr{counter+1} = hol;
-                   counter =  counter+1;
+                    coordinates = [coordinates; hole_arr_temp.coordinates(i,:)];
                 end
             else
-                   hole_arr{counter+1} = hol;
-                   counter =  counter+1;
+                coordinates = [coordinates; hole_arr_temp.coordinates(i,:)];
             end
                 
-        end
+
     end
     
-    elem_out = element_array(hole_arr);
-    
+    elem_out = element_grid(hole, coordinates);
+
     
     
     
