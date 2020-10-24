@@ -202,30 +202,35 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
        function [output_elem] = duplicate(obj,size, spacing)
             % written by Guy 2020_08_28 as an external function
             % made it a  method on 2020_10_10
+            % editted on 2020_10_24 to use element_grid (should be much more efficient)
             % 
-            % returns an element_array object which is a 2D array of copies of
+            % returns an element_grid object which is a 2D array of copies of
             % input_elem.
             %  
             % input arguments:
             % size : the dimensions of the array given as a 2 vector [rows, collums]
             % spacing : the spcacing between rows and collums, given as a 2 vector.
+            
 
-            arr = cell(size(1), size(2));
+            coordinates = nan( size(1)*size(2),2);
+            counter = 0;
             for i = 1:size(1)
                 for j = 1:size(2)
                     y = -spacing(1)*(size(1)-1)/2+spacing(1)*(i-1);
                     x = -spacing(2)*(size(2)-1)/2+spacing(2)*(j-1);
-                    arr{i,j} =  obj.copy().shift([x,y]);
-
+                    coordinates(counter+1,:) =  [x,y];
+                    counter = counter+1;
                 end
             end
-            output_elem = element_array(arr);
+            output_elem = element_grid(obj, coordinates);
         end
 
         function [output_elem] = duplicate_circ(obj,angle, N,origin, rotate)
             %written by Guy 2020_08_28 as an external function
-            % made a method on 2020_10_10
-            %   returns an element_array which is a circular  array of copies of
+            % made into a method on 2020_10_10
+            % editted on 2020_10_24 to use element_grid for resource
+            % effeciency
+            %   returns an element_grid object which is a circular  array of copies of
             %   input_elem
             %
             %   input arguments:
@@ -247,18 +252,21 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             R = sqrt(pos(1)^2 + pos(2)^2);
 
             angle_in = atan(pos(2)/pos(1));
-            arr = cell(1,N);
+            counter = 0;
+            coordinates = nan(N,2);
+            rotation_angles = zeros(1,N);
             for i = 1:N
                     angle_temp = angle_in + angle*(i-1);
                     x = R*cos(angle_temp);
                     y = R*sin(angle_temp);
 
-                    arr{i} =  obj.copy().place('origin',[x,y] + origin);
+                    coordinates(counter+1,:) =  [x,y];
+                    counter = counter +1;
                     if rotate
-                        arr{i}.rotate(angle*(i-1));
+                        rotation_angles(i)=(angle*(i-1));
                     end
             end
-            output_elem = element_array(arr);
+            output_elem = element_grid(obj, coordinates, rotation_angles);
         end
         
         function [x_limit,y_limit] =  bounding_box(obj)
