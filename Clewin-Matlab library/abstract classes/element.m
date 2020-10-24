@@ -329,13 +329,22 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
             
         end
         
-        function [x_limit,y_limit] =  bounding_box(obj)
+        function [x_limit,y_limit] =  bounding_box(obj, tol)
             % written by guy 2020_10_23
             % this is an envelope for matlab's builtin boundingbox
             % the outputs x_limit and y_limit are 2-vectors containig the
             % lower and upper bound in each coordinate for the elements
             % bounnding box
-           [x_limit, y_limit] = boundingbox(obj.convert2pol()); 
+            % tol is an optional argument (by default 0) specifying a
+            % tolerance (in um) (just increasing the resulting boundaries by tol)
+           if nargin<2
+               tol=0;
+           end
+           tol_vec = [-tol, tol];
+            [x_limit, y_limit] = boundingbox(obj.convert2pol());
+            x_limit = x_limit + tol_vec;
+            y_limit = y_limit + tol_vec;
+           
         end
         
         function TF =  overlap(elem1, elem2)
