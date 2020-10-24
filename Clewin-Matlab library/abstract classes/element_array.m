@@ -87,6 +87,17 @@ classdef element_array < element
             cellfun(@(x) x.set_layer(layer_obj),obj.elements ,'uniformoutput', false);
             obj.layer = layer_obj;
         end
+        
+        function pol = bounding_pol(obj, tol)
+            % returns a matlab polyshape object which is the union of
+            % bounding boxes of the sub elements.
+            % tol is an optional parameter specifying tolerance in um
+            if nargin<2
+               tol=0;
+            end
+            polVec =  cellfun(@(x) x.bounding_pol(tol), obj.elements);
+            pol = union(polVec);
+        end
 
        
        
