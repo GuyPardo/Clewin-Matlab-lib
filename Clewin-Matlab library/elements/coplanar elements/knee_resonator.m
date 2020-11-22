@@ -23,7 +23,7 @@ classdef knee_resonator < compound_element
     % ports:
     % input - the end of the coupling knee
     % output - the other end of the resonator
-    % center - the center of the meander.
+    % origin = center - the center of the meander.
 
    properties
        length
