@@ -104,10 +104,13 @@ classdef knee_resonator < compound_element
            obj.ports.output = obj.elements.outLine.ports.output;
     
           obj.ports.center = obj.elements.mea.ports.center;
+          
           obj.trace_w = trace_w;
           obj.gap_w = gap_w;
           obj.length = obj.get_length();
           obj.coupling_l = coupling_l;
+          obj.shift(-obj.ports.center);
+          obj.ports.origin = [0,0];
            
        end
          

@@ -33,6 +33,7 @@ classdef element_grid < element
 %                obj.source_element.shift(-obj.coordinates(i,:)) % shift back
                obj.source_element.rotate(-obj.rotation_angles(i)); % rotate back
            end
+           obj.source_element.place('origin', origin);
        end
         function [pol] = convert2pol(obj)
         % converts the element to a matlab polyshape object.              
@@ -87,10 +88,11 @@ classdef element_grid < element
            if nargin<3
                 obj.source_element.apply_transformation(mat);
            else
+               obj.source_element.apply_transformation(mat);
                % apply the transformation on the coordinates
-                obj.shift(-origin);
-                obj.coordinates = transpose(mat*transpose(obj.coordinates));
-                obj.shift(+origin);
+                org_temp_mat = repmat(origin-obj.source_element.ports.origin,length(obj.coordinates),1);
+                obj.coordinates = org_temp_mat + transpose(mat*transpose(obj.coordinates-org_temp_mat));
+                
                 % call parent version in order to update the ports
                 apply_transformation@element(obj, mat,origin);  
             

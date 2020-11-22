@@ -91,14 +91,16 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
         % origin port of the element
         %
 
-            % initialize origin if not supplied by user
+
+            R = @(x) [cos(x), -sin(x); sin(x), cos(x)];  % define rotation matrix  
             if nargin < 3
-                origin = obj.ports.origin;
+                 obj.apply_transformation(R(angle));  % apply  
+
+            else                  
+                obj.apply_transformation(R(angle), origin);  % apply  
             end
 
-            R = @(x) [cos(x), -sin(x); sin(x), cos(x)];  % define rotation matrix            
-                   
-            obj.apply_transformation(R(angle), origin);  % apply    
+  
         end
         
         
@@ -125,19 +127,19 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
         % arguments:
         %
         % axis: a 2 vector which is the axis of reflection origin
-        % (optional): a 2 vector. the  origin of the transformation.
+        % origin (optional): a 2 vector. the  origin of the transformation.
         % by default it's the origin port of the element
            
-           % initialize origin if not supplied by user
-           if nargin<3
-               origin = obj.ports.origin;
-           end
            % define transformation (see https://en.wikipedia.org/wiki/Transformation_matrix#Reflection)
            lx = axis(1);
            ly = axis(2);
            trans_mat = 1/(lx^2+ly^2)*[lx^2-ly^2, 2*lx*ly; 2*lx*ly, ly^2-lx^2];
-           % apply: 
-           obj.apply_transformation(trans_mat, origin);
+           % apply:
+           if nargin==3
+                obj.apply_transformation(trans_mat,origin); 
+           else
+                obj.apply_transformation(trans_mat);
+           end
         end
         
 

@@ -1,4 +1,6 @@
 clf;
+% this script creates a generic design of a feedline with some resonators
+% coupled to it. to exemplify how to use the library.
 %% feedline
 
 
@@ -19,6 +21,7 @@ feedline = compound_element(line, lau_in, lau_out);
 
 feedline.draw();
 
+
 %% knee resonators
 res_length = 7000;
 coupling_l = 200;
@@ -30,7 +33,8 @@ res = knee_resonator(res_length, coupling_l);
 res.place('input', feedline.ports.origin  - [coupling_l,  coupling_gap]);
 
 % duplicate resonators
-arr1 = res.duplicate([1,5], [0,800]).draw();
-arr2 = arr1.copy().reflect([1,0]).draw();
+arr1 = res.duplicate([1,5], [800,800]).draw();
+arr2 = arr1.copy().reflect([1,0],[0,0]).draw();
+
 
 
