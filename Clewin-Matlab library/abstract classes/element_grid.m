@@ -1,9 +1,18 @@
 classdef element_grid < element
 % a collection of copies of the same element. more resource efficient than
 % element_array in case you want an array of copies of the same object. 
+% it is made up of a source element, and a set of coordinates for the
+% copies
 % 
 %input arguments for ctor:
+%required:
+% source_element : the element you want to duplicate
+% coordinates : a N*2 matrix of coordinates
 %
+% optional: 
+% rotation_angles: an N vector of angles to rotate the different copies, by
+% deault all zero.
+
 
    properties
        source_element % an element object
