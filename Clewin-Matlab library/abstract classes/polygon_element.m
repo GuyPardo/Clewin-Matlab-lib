@@ -90,11 +90,31 @@ classdef polygon_element < element
         % the first polygon (obj1).
         % It is therefore better to use minus (-) to perform subtraction
         % between any two elements.
-     
-        nodes1 = [obj1.nodes; obj1.nodes(1,:)];
-        nodes2 = [obj2.nodes; obj2.nodes(1,:); obj1.nodes(1,:)];
+        nodes1 = obj1.nodes;
+        nodes2 = obj2.nodes;
+        
+        distances = zeros(length(nodes1), length(nodes2));
+        
+        for i=1:length(nodes1)
+            for j = 1: length(nodes2)
+                distances(i,j) = (nodes1(i,1) - nodes2(j,1)).^2 + (nodes1(i,2) - nodes2(j,2)).^2;
+            end
+        end
+        I = find(distances==min(min(distances)));
+        I=I(1)
+       [row, col] = ind2sub(size(distances),I)
+        
+        nodes_out = [nodes1(row,:); nodes1((row+1):end,:); nodes1(1:row,:); nodes2(col,:); nodes2((col+1):end,:); nodes2(1:col,:); nodes1(row,:)];
+        
+%         nodes1 = [obj1.nodes; obj1.nodes(1,:)];
+%         nodes2 = [obj2.nodes; obj2.nodes(1,:) obj1.nodes(1,:)];
+%         
+%         
+%         
+%         nodes1 = [obj1.nodes; ];
+%         nodes2 = [obj2.nodes; obj2.nodes(1,:) obj1.nodes(1,:)];
 
-        obj_out = polygon_element([nodes1; nodes2]);
+        obj_out = polygon_element(nodes_out);
         end
         
         function pol = bounding_pol(obj, tol)

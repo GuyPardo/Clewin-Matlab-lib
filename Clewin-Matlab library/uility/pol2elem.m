@@ -1,7 +1,7 @@
 function [elem] = pol2elem(pol)
 % written by Guy 2020_08_29 returns an elemet_array or a polygon_element
 
-pol = simplify(pol);
+pol = simplify(pol, 'keepcollinearpoints', false);
 rgns = regions(pol); % regions of pol
 elems = cell(length(rgns),1); % pre allocating cell array
 for i = 1:length(rgns)
