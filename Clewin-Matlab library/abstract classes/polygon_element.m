@@ -93,6 +93,8 @@ classdef polygon_element < element
         nodes1 = obj1.nodes;
         nodes2 = obj2.nodes;
         
+        
+        % find  the 2 points closest to each other:
         distances = zeros(length(nodes1), length(nodes2));
         
         for i=1:length(nodes1)
@@ -101,18 +103,12 @@ classdef polygon_element < element
             end
         end
         I = find(distances==min(min(distances)));
-        I=I(1)
-       [row, col] = ind2sub(size(distances),I)
+        % if there are several points of the same minimal distance, pick
+        % one:
+        I=I(1);
+       [row, col] = ind2sub(size(distances),I); % translate indices
         
         nodes_out = [nodes1(row,:); nodes1((row+1):end,:); nodes1(1:row,:); nodes2(col,:); nodes2((col+1):end,:); nodes2(1:col,:); nodes1(row,:)];
-        
-%         nodes1 = [obj1.nodes; obj1.nodes(1,:)];
-%         nodes2 = [obj2.nodes; obj2.nodes(1,:) obj1.nodes(1,:)];
-%         
-%         
-%         
-%         nodes1 = [obj1.nodes; ];
-%         nodes2 = [obj2.nodes; obj2.nodes(1,:) obj1.nodes(1,:)];
 
         obj_out = polygon_element(nodes_out);
         end
