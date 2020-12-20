@@ -127,6 +127,26 @@ classdef polygon_element < element
             [x,y] =  bounding_box(obj, tol);
             pol= polyshape([x(1), x(1), x(2),x(2)],[ y(1), y(2), y(2), y(1)]);
         end
+        
+        function obj = round_corners(obj, R)
+           N = length(obj.nodes);
+           
+           nodes_ =[ obj.nodes(N,:); obj.nodes; obj.nodes(1,:)];
+            
+            for i = 2:N+1
+                A = nodes_(i-1,:); 
+                B = nodes_(i,:);
+                C = nodes_(i+1,:);
+
+                angle = atan2(C(2) - B(2), C(1) -B(1) ) - atan2(A(2) - B(2), A(1) -B(1) );
+                if angle<0
+                    angle = 2*pi + anlge
+                end
+                
+                
+            end
+            
+        end
 
 
    end
