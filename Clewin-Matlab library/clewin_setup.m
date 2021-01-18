@@ -1,6 +1,8 @@
 
-% run this from clewin once. with lib_path the path to the liberary folder
-% by default it is "Z:\Clewin-Matlab library" 
+% run this from clewin once.
+% you have to call this script file clewin_setup.m
+% if you copy and paste it won't work and will probably cause a big mess.
+
 n_chars = numel('clewin_setup');
 % full_name =  matlab.desktop.editor.getActiveFilename;
 full_name =  mfilename('fullpath');
