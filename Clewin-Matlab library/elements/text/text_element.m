@@ -34,7 +34,11 @@ classdef text_element < element
            end
 
             set_layer(obj.layer.id);
-            text(obj.txt_str, obj.mat);
+            try
+                text(obj.txt_str, obj.mat);
+            catch
+                warning('text_elment is not drawn in matlab but will appear inside clewin')
+            end
             
        end
        
