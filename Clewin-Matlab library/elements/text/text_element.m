@@ -37,7 +37,7 @@ classdef text_element < element
             try
                 text(obj.txt_str, obj.mat);
             catch
-                warning('text_elment is not drawn in matlab but will appear inside clewin')
+                warning('drawing a text_element in matalb is not supported (yet), but it should work when you run in from CleWin.')
             end
             
        end
