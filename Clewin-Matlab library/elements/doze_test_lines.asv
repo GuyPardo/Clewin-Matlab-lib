@@ -1,0 +1,45 @@
+classdef doze_test_lines < compound_element
+    %Doze_test creates horizontal and vertical lines for doze testing
+    % 
+    
+    properties
+        n_lines
+        line_w
+        line_l
+        gap
+    end
+    
+    methods
+        function obj = doze_test_lines(line_w, varargin)
+            %UNTITLED Construct an instance of this class
+            %   Detailed explanation goes here
+            
+            %parse input
+            p = inputParser;
+            p.addparameter('n_lines', 4);
+            p.addparameter('line_l', 100);
+            p.addparameter('gap', line_w);
+            
+            p.parse(varargin{:});
+            obj.n_lines = p.Result.n_lines;
+            obj.line_l = p.Result.line_l;
+            obj.gap = p.Result.gap;
+            obj.line_w = line_w;
+            
+            % actual ctor starts here
+            unit_vert = rect(obj.line_w, obj.line_l).place('bottom', [0,0]);
+            unit_horz = rect(obj.line_l, obj.line_w).place('right', unit_vert.ports.bottom);
+            vert_array = unit_vert.
+            
+            
+            
+        end
+        
+        function outputArg = method1(obj,inputArg)
+            %METHOD1 Summary of this method goes here
+            %   Detailed explanation goes here
+            outputArg = obj.Property1 + inputArg;
+        end
+    end
+end
+
