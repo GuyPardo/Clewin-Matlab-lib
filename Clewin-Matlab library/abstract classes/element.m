@@ -293,8 +293,11 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
 
             pos = obj.ports.origin - origin;
             R = sqrt(pos(1)^2 + pos(2)^2);
+            
+            
 
-            angle_in = atan(pos(2)/pos(1));
+            angle_in = atan2(pos(2),pos(1));
+            display(angle_in)
             
             if return_element_array
                 arr = cell(1,N);
@@ -319,7 +322,7 @@ classdef (Abstract) element  <  matlab.mixin.Copyable
                         x = R*cos(angle_temp);
                         y = R*sin(angle_temp);
 
-                        coordinates(counter+1,:) =  [x,y];
+                        coordinates(counter+1,:) =  [x,y] - pos;
                         counter = counter +1;
                         if rotate
                             rotation_angles(i)=(angle*(i-1));

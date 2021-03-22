@@ -16,7 +16,7 @@ classdef narrows < compound_element
             p = inputParser;
             p.addParameter('arrow_l', 1000);
             p.addParameter('arrow_w', 100);
-            p.addParameter('gap', 100);
+            p.addParameter('gap', 200);
             
             p.parse(varargin{:});
             obj.arrow_l = p.Results.arrow_l;
@@ -26,7 +26,7 @@ classdef narrows < compound_element
             
             
             unit_arrow = arrow(obj.arrow_l, obj.arrow_w).place('head', [0,obj.gap/2]);
-            obj.elements.grid = unit_arrow.duplicate_circ(2*pi/n,n); 
+            obj.elements.grid = unit_arrow.duplicate_circ(2*pi/n,n, [0,0]); 
         end
         
         function outputArg = method1(obj,inputArg)
