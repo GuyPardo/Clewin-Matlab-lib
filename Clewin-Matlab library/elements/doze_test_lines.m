@@ -42,7 +42,8 @@ classdef doze_test_lines < compound_element
             
             txt_str = sprintf('%g um',obj.line_w );
             
-            obj.elements.text = text_element(txt_str,obj.line_l*0.3).shift([-obj.line_l*1.15,obj.line_l*1.15]);
+            obj.elements.text = text_element(txt_str,obj.line_l*0.3).shift([-obj.line_l*1.15,obj.line_l*1.15])
+            obj.shift([obj.line_l/2,-obj.line_l/2]);
             
         end
         
