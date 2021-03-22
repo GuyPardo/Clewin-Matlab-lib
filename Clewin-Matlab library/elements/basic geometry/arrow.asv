@@ -1,17 +1,12 @@
 classdef arrow < compound_element
-    %ARROW an arrow with a given length and width, pointing downwards. made out of a triangle
-    % and a rectangle. length is the total length, width is the rectangle
+    %ARROW an arrow with a given length and width, made out of a triangle
+    %and a rectangle. length is the total length, width is the rectangle
     %width. in this design the origin is not exactly in the middle, but in the center of the rectangle, in some
     %applications this might be important.
     % 
     % inputs for ctor:
-    % length (total length)
-    %  width (of the rectangle)
-    %
-    % ports
-    % origin: the origin of the rectangle
-    % tail : top of rectangle 
-    % head : the far end (bottom) of the triangle
+    % length (total le)
+    % width
     
     
     properties

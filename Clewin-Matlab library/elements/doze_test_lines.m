@@ -1,13 +1,16 @@
 classdef doze_test_lines < compound_element
-    %Doze_test creates horizontal and vertical lines for doze testing
+    %Doze_test_lines creates horizontal and vertical lines for doze testing
     % with text indicating the width of the lines
     % argumaents for ctor:
     % line_w : width of each line
     %
-    % optional parameters: (optional parameter call with name-value pair)
+    % optional parameters: (call with name-value pair)
     % n_lines (default value: 4) number of horizontal and vertical lines
     % line_l (default value: 100) : length of each line 
     % gap (default value: same as line_w) : gap between the lines
+    %
+    % ports:  just the origin, which is located at the center of
+    % the design
     
     properties
         n_lines

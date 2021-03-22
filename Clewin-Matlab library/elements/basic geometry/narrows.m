@@ -1,6 +1,19 @@
 classdef narrows < compound_element
-    %NARROWS Summary of this class goes here
-    %   Detailed explanation goes here
+    %NARROWS a circular array of n  equidistant arrows (n is an input argument) pointing
+    % towards the origin. 
+    %   
+    % input arguments for ctor:
+    % n - number of arrows
+    %
+    % optional parameters (call with name-value pair):
+    % 
+    % arrow_l (default value: 1000) length of each arrow
+    % arrow_w (default value: 100) width of each arrow
+    % gap (defualt value: 200) : size of the gap at the origin between the
+    % arrows  = the distance between two opposing arrow heads.
+    %
+    %ports: for now just the origin. 
+    
     
     properties
         arrow_l
