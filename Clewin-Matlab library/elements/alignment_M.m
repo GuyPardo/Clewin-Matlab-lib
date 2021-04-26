@@ -19,7 +19,7 @@ classdef alignment_M  < compound_element
            
            obj.elements.arc_L = arc(R,2*pi,R/2-5);
            obj.elements.arc_S = arc(3,2*pi,2);
-           
+           obj.elements.circ = circ(1);
            
            obj.elements.topLef = polygon_element([-R/2 R*2; -3 R*2; -3 R/2]);
            obj.elements.topRig = polygon_element([R/2 R*2; 3 R*2; 3 R/2]);

@@ -1,4 +1,4 @@
-classdef circle < polygon_element
+classdef circ < polygon_element
  % a basic circle
  % ports:
  % origin: the center of the circle
@@ -9,7 +9,7 @@ classdef circle < polygon_element
     end
     
     methods
-        function obj = circle(R)
+        function obj = circ(R)
             %circle Construct a circle element with radius R.
             res  = 200; % rendering resolutoin (no of points)
 
