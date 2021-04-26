@@ -1,0 +1,48 @@
+classdef ebeam_AMs < compound_element
+    % A-B-C-D  alignment-marks for ebeam
+    %   4 alignment marks labelled A,B,C,D, arranged  in a rectangle.
+    %
+    % inputs for ctor:
+    % W_x ,W_y : rectangle dimensions
+    % R : alignment mark size
+    % 
+    
+    properties
+        R
+        pos_label
+    end
+    
+    methods
+        function obj = ebeam_AMs(Wx,Wy,varargin)
+            %UNTITLED6 Construct an instance of this class
+            %   Detailed explanation goes here
+            % input parsing
+            p = inputParser;
+            p.addOptional('R',30);
+            p.addParameter('pos_label',false)
+            
+            parse(p,varargin{:})
+            
+            obj.R = p.Results.R;
+            obj.pos_label = p.Results.pos_label;
+            
+            % actual_ctor
+            obj.elements.A = alignment_M(obj.R, 'A').place('origin', [-Wx/2, -Wy/2]);
+            obj.elements.B = alignment_M(obj.R,'B').place('origin', [+Wx/2, -Wy/2]);
+            obj.elements.C = alignment_M(obj.R,'C').place('origin', [+Wx/2, +Wy/2]);
+            obj.elements.D = alignment_M(obj.R,'D').place('origin', [-Wx/2, +Wy/2]);
+            
+
+        end
+        
+        function [obj] = draw(obj)
+            %envelope for elemet's draw - to recalculate coordinates for
+            %labels
+            if obj.pos_label
+                obj.elements.A.
+            end
+            
+        end
+    end
+end
+
