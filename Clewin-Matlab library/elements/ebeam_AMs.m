@@ -35,8 +35,8 @@ classdef ebeam_AMs < compound_element
             % actual_ctor
             obj.elements.A = alignment_M(obj.R, 'A').place('origin', [-Wx/2, -Wy/2]);
             obj.elements.B = alignment_M(obj.R,'B').place('origin', [+Wx/2, -Wy/2]);
-            obj.elements.C = alignment_M(obj.R,'C').place('origin', [+Wx/2, +Wy/2]);
-            obj.elements.D = alignment_M(obj.R,'D').place('origin', [-Wx/2, +Wy/2]);
+            obj.elements.C = alignment_M(obj.R,'C').place('origin', [-Wx/2, +Wy/2]);
+            obj.elements.D = alignment_M(obj.R,'D').place('origin', [Wx/2, +Wy/2]);
             
 
         end
