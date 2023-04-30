@@ -1,0 +1,21 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Clewin Matlab Library
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Guy
+    family-names: Pardo
+    email: guy.pardo@mail.huji.ac.il
+    affiliation: Hebrew University of Jerusalem
+identifiers:
+  - type: url
+    value: 'https://github.com/GuyPardo/Clewin-Matlab-lib'
+repository-code: 'https://github.com/GuyPardo/Clewin-Matlab-lib'
+abstract: 'a matlab library to make clewin designs '
+version: 3.2.2
+date-released: '2022-02-15'
